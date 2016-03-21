@@ -1,1 +1,1 @@
-alert('hello')
+console.log('js serving');

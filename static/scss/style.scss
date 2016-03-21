@@ -1,0 +1,41 @@
+*{
+    box-sizing: border-box;
+    font-family:"Avenir Next";
+}
+
+body {
+    background-color:aliceblue
+}
+
+.test {
+    line-height: 1.3em;
+    
+    color: darkslategrey;
+    border-radius: 20px;
+    background-color:cornsilk;
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.test::before {
+    content: 'YOLO';
+}
+
+.test2 {
+    padding: 20px 20px;    
+}
+
+.lel {
+    float: left;
+}
+
+#div1 {
+    float: left;
+    max-width: 500px;
+}
+
+#div2 {
+    float: right;
+    max-width: 200px;
+}

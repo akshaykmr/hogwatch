@@ -1,0 +1,42 @@
+/* line 1, /Users/akshay/Documents/Programming/python/bandwidth_monitor/static/scss/style.scss */
+* {
+  box-sizing: border-box;
+  font-family: "Avenir Next"; }
+
+/* line 6, /Users/akshay/Documents/Programming/python/bandwidth_monitor/static/scss/style.scss */
+body {
+  background-color: aliceblue; }
+
+/* line 10, /Users/akshay/Documents/Programming/python/bandwidth_monitor/static/scss/style.scss */
+.test {
+  line-height: 1.3em;
+  color: darkslategrey;
+  border-radius: 20px;
+  background-color: cornsilk;
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px; }
+
+/* line 21, /Users/akshay/Documents/Programming/python/bandwidth_monitor/static/scss/style.scss */
+.test::before {
+  content: 'YOLO'; }
+
+/* line 25, /Users/akshay/Documents/Programming/python/bandwidth_monitor/static/scss/style.scss */
+.test2 {
+  padding: 20px 20px; }
+
+/* line 29, /Users/akshay/Documents/Programming/python/bandwidth_monitor/static/scss/style.scss */
+.lel {
+  float: left; }
+
+/* line 33, /Users/akshay/Documents/Programming/python/bandwidth_monitor/static/scss/style.scss */
+#div1 {
+  float: left;
+  max-width: 500px; }
+
+/* line 38, /Users/akshay/Documents/Programming/python/bandwidth_monitor/static/scss/style.scss */
+#div2 {
+  float: right;
+  max-width: 200px; }
+
+/*# sourceMappingURL=style.css.map */
