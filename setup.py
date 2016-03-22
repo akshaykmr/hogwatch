@@ -29,6 +29,7 @@ setup(
     # Dependent packages (distributions)
     install_requires=[
         "bottle",
-        'pywebview'
+        'pywebview',
+        'gevent-websocket'
     ],
 )
