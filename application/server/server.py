@@ -1,5 +1,6 @@
-from bottle import Bottle, route, run, template, static_file, redirect
+from bottle import Bottle, route, run, template, static_file, redirect, debug
 app=Bottle()
+debug(True)
 
 
 #testing
@@ -20,10 +21,10 @@ if __name__=='__main__':
 
     @app.route('/<filename:path>')
     def send_static(filename):
-        return static_file(filename, root='./static/')
+        return static_file(filename, root='../static/')
 
 
 
 
-    app.run(host='localhost', port=8080, debug=True, reloader=True)
+    app.run(host='0.0.0.0', port=8080, debug=True, reloader=True)
 
