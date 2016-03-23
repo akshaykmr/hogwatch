@@ -1,3 +1,7 @@
+import json, time
+from Queue import Queue
+from pprint import pprint
+
 from bottle import (
     Bottle,
     route,
@@ -10,13 +14,10 @@ from bottle import (
     abort
 )
 
-from Queue import Queue
-from pprint import pprint
-
 def web_service(
         report_queue=Queue(),
         host='0.0.0.0',
-        port=8080,
+        port=8010,
         debugMode=True,
         reloader=True,
         ws=True
@@ -48,10 +49,12 @@ def web_service(
 
             while True:
                 try:
+                    #pprint(report)
+                    message = wsock.receive()
+                    #if wsock.socket is not None:
                     report=report_queue.get()
-                    pprint(report)
-                    #message = wsock.receive()
-                    wsock.send("Your message was: %r" % message)
+                    wsock.send(json.dumps(report))
+                    time.sleep(3)
                 except WebSocketError:
                     break
 

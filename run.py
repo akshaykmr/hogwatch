@@ -29,4 +29,4 @@ if __name__=='__main__':
 
     from application.view.window import window
 
-    window('hogwatch','http://10.211.55.9:8080')
+    window('hogwatch','http://10.211.55.9:8010')
