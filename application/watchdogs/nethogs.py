@@ -3,25 +3,27 @@ from pprint import pprint
 
 #todo learn logging
 
-class TransferWatchdog :
+class NethogsWatchdog :
     def __init__(self,output_queues,devices=[],delay=1):
         self.devices=devices
         self.output_queues=output_queues
         self.delay=str(delay)
 
-    def watch_transfer(self,mode='0'):
-        '''mode 0=kb/s 3=amount in MB'''
+    def watch_transfer(self,mode='transfer_rate'):
+        #param 0=rate, 3 amount in MB
 
-        cmd=['nethogs','-d',self.delay, '-v',mode,'-t']+self.devices
+        if mode=='transfer_rate':
+            param='0'
+        else:
+            param='3'
+
+        cmd=['nethogs','-d',self.delay, '-v',param,'-t']+self.devices
         print cmd
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1)
 
         refresh_flag=True #naming is tough...
         report={}
-        if(mode=='0'):
-            report['mode']='transfer_rate'
-        if(mode=='3'):
-            report['mode']='transfer_amount'
+        report['mode']=mode
 
         entries=[]      
         for line in iter(p.stdout.readline, b''):
@@ -38,11 +40,11 @@ class TransferWatchdog :
                 entry={}
                 entry['process']=split[0]
 
-                if(mode=='0'):
+                if(mode=='transfer_rate'):
                     #kbps out/in
                     entry['kbps_out']=float(split[1])
                     entry['kbps_in']=float(split[2])
-                else:
+                else: #mode is 'transfer_amount'
                     #MB out/in
                     entry['mb_out']=float(split[1])
                     entry['mb_in']=float(split[2])
@@ -71,7 +73,9 @@ class TransferWatchdog :
                 report['total_out']=total_out
                 report['entries']=entries
                 entries=[]
-                pprint(report)
+                #pprint(report)
+                for q in self.output_queues:
+                    q.put(report)
 
         p.stdout.close()
         p.wait()
@@ -79,5 +83,5 @@ class TransferWatchdog :
 
 if __name__=='__main__':
 
-    x=TransferWatchdog('no_queue',sys.argv[1:])
+    x=NethogsWatchdog('no_queue',sys.argv[1:])
     x.watch_transfer()

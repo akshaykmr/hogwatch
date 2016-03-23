@@ -10,7 +10,17 @@ from bottle import (
     abort
 )
 
-def web_service(host='0.0.0.0',port=8080,debugMode=True, reloader=True, ws=True):
+from Queue import Queue
+from pprint import pprint
+
+def web_service(
+        report_queue=Queue(),
+        host='0.0.0.0',
+        port=8080,
+        debugMode=True,
+        reloader=True,
+        ws=True
+    ):
     app=Bottle()
 
     #static routes
@@ -20,7 +30,13 @@ def web_service(host='0.0.0.0',port=8080,debugMode=True, reloader=True, ws=True)
 
     @app.route('/<filename:path>')
     def send_static(filename):
-        return static_file(filename, root='../static/')
+        return static_file(
+            filename,
+            root='/home/akshay/Documents/hogwatch/application/static/'
+        )
+
+        ## ^^ have to use full path for static folder. relative one will
+        ## not work with run.py -- NEED TO FIX 
 
 
     if ws:
@@ -32,7 +48,9 @@ def web_service(host='0.0.0.0',port=8080,debugMode=True, reloader=True, ws=True)
 
             while True:
                 try:
-                    message = wsock.receive()
+                    report=report_queue.get()
+                    pprint(report)
+                    #message = wsock.receive()
                     wsock.send("Your message was: %r" % message)
                 except WebSocketError:
                     break
