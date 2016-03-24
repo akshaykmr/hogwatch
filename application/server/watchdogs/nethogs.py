@@ -1,16 +1,20 @@
 import subprocess, sys
+from Queue import Queue
 from pprint import pprint
 
 #todo learn logging
 
 class NethogsWatchdog :
-    def __init__(self,output_queues,devices=[],delay=1):
+    def __init__(self,debug=False,devices=[],delay=1):
         self.devices=devices
-        self.output_queues=output_queues
         self.delay=str(delay)
+        self.debug=debug
 
-    def watch_transfer(self,mode='transfer_rate'):
+    def watch_transfer(self,mode='transfer_rate',q=Queue()):
         #param 0=rate, 3 amount in MB
+
+        if mode not in ['transfer_rate','transfer_amount']:
+            raise ValueError('mode not supported')
 
         if mode=='transfer_rate':
             param='0'
@@ -24,6 +28,7 @@ class NethogsWatchdog :
         refresh_flag=True #naming is tough...
         report={}
         report['mode']=mode
+        report['ctr']=0 
 
         entries=[]      
         for line in iter(p.stdout.readline, b''):
@@ -72,9 +77,12 @@ class NethogsWatchdog :
                 report['total_in']=total_in
                 report['total_out']=total_out
                 report['entries']=entries
+                report['ctr']+=1 # I dont know why there is a race condition here -_-'
                 entries=[]
-                #pprint(report)
-                for q in self.output_queues:
+
+                if self.debug:
+                    pprint(report)
+                else:
                     q.put(report)
 
         p.stdout.close()
@@ -83,5 +91,5 @@ class NethogsWatchdog :
 
 if __name__=='__main__':
 
-    x=NethogsWatchdog('no_queue',sys.argv[1:])
+    x=NethogsWatchdog(debug=True,devices=sys.argv[1:])
     x.watch_transfer()

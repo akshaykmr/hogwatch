@@ -1,5 +1,6 @@
-import json, time
+import json, gevent
 from Queue import Queue
+from threading import Thread
 from pprint import pprint
 
 from bottle import (
@@ -14,8 +15,9 @@ from bottle import (
     abort
 )
 
+from watchdogs.nethogs import NethogsWatchdog
+
 def web_service(
-        report_queue=Queue(),
         host='0.0.0.0',
         port=8010,
         debugMode=True,
@@ -28,6 +30,41 @@ def web_service(
     @app.route('/')
     def home():
         redirect('/index.html')
+    
+    if ws:
+        connections_count=0
+
+        @app.route('/websocket/<device>/<mode>')
+        def handle_websocket(device='eth0',mode='transfer_rate'):
+            device_list= device.split('_')
+            pprint(device_list)
+            pprint(mode)
+            print '******************************************'
+
+            tom=NethogsWatchdog(devices=device_list)
+
+            q=Queue()
+            t=Thread(
+                target=tom.watch_transfer,
+                args=(mode,q)
+            )
+            t.daemon=True
+            t.start()
+
+            wsock = request.environ.get('wsgi.websocket')
+            if not wsock:
+                abort(400, 'Expected WebSocket request.')
+            
+            while True:
+                try:
+                    message = wsock.receive()
+                    report=q.get()
+                    wsock.send(json.dumps(report))
+                    gevent.sleep(0.1)
+                except WebSocketError:
+                    print 'noooooooooooooooooooooooooooooo'
+                    break
+
 
     @app.route('/<filename:path>')
     def send_static(filename):
@@ -40,25 +77,10 @@ def web_service(
         ## not work with run.py -- NEED TO FIX 
 
 
+
+
+
     if ws:
-        @app.route('/websocket')
-        def handle_websocket():
-            wsock = request.environ.get('wsgi.websocket')
-            if not wsock:
-                abort(400, 'Expected WebSocket request.')
-
-            while True:
-                try:
-                    #pprint(report)
-                    message = wsock.receive()
-                    #if wsock.socket is not None:
-                    report=report_queue.get()
-                    wsock.send(json.dumps(report))
-                    time.sleep(3)
-                except WebSocketError:
-                    break
-
-
         from gevent.pywsgi import WSGIServer
         from geventwebsocket import WebSocketError
         from geventwebsocket.handler import WebSocketHandler
@@ -71,4 +93,4 @@ def web_service(
 
 
 if __name__ == '__main__':
-    web_service()
+    web_service(ws=True)
