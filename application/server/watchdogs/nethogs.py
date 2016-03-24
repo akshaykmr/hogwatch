@@ -1,6 +1,7 @@
 import subprocess, sys
 from Queue import Queue
 from pprint import pprint
+from threading import Event
 
 #todo learn logging
 
@@ -10,19 +11,20 @@ class NethogsWatchdog :
         self.delay=str(delay)
         self.debug=debug
 
-    def watch_transfer(self,mode='transfer_rate',q=Queue()):
+    def watch_transfer(self,mode='transfer_rate',bridge={}):
         #param 0=rate, 3 amount in MB
 
         if mode not in ['transfer_rate','transfer_amount']:
             raise ValueError('mode not supported')
 
-        if mode=='transfer_rate':
+        if mode=='transfer_rate':   
             param='0'
         else:
             param='3'
 
         cmd=['nethogs','-d',self.delay, '-v',param,'-t']+self.devices
-        print cmd
+        if self.debug:
+            print cmd
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1)
 
         refresh_flag=True #naming is tough...
@@ -83,10 +85,14 @@ class NethogsWatchdog :
                 if self.debug:
                     pprint(report)
                 else:
-                    q.put(report)
+                    bridge['queue'].put(report)
 
         p.stdout.close()
-        p.wait()
+
+        if self.debug:
+            p.wait()
+        else:
+            bridge['event'].wait()
 
 
 if __name__=='__main__':

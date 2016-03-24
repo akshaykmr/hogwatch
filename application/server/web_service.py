@@ -1,6 +1,6 @@
 import json, gevent
 from Queue import Queue
-from threading import Thread
+from threading import Thread, Event
 from pprint import pprint
 
 from bottle import (
@@ -26,7 +26,6 @@ def web_service(
     ):
     app=Bottle()
 
-    #static routes
     @app.route('/')
     def home():
         redirect('/index.html')
@@ -37,16 +36,21 @@ def web_service(
         @app.route('/websocket/<device>/<mode>')
         def handle_websocket(device='eth0',mode='transfer_rate'):
             device_list= device.split('_')
-            pprint(device_list)
-            pprint(mode)
-            print '******************************************'
 
-            tom=NethogsWatchdog(devices=device_list)
+            if debugMode:
+                pprint(device_list)
+                pprint(mode)
+                print '******************************************'
 
-            q=Queue()
+            tommy=NethogsWatchdog(devices=device_list)
+            bridge={
+                'queue': Queue(),
+                'event': Event()
+            }
+
             t=Thread(
-                target=tom.watch_transfer,
-                args=(mode,q)
+                target=tommy.watch_transfer,
+                args=(mode,bridge)
             )
             t.daemon=True
             t.start()
@@ -58,11 +62,11 @@ def web_service(
             while True:
                 try:
                     message = wsock.receive()
-                    report=q.get()
+                    report=bridge['queue'].get()
                     wsock.send(json.dumps(report))
                     gevent.sleep(0.1)
                 except WebSocketError:
-                    print 'noooooooooooooooooooooooooooooo'
+                    bridge['event'].set()
                     break
 
 
@@ -94,3 +98,4 @@ def web_service(
 
 if __name__ == '__main__':
     web_service(ws=True)
+    #todo kill threads on sigint
