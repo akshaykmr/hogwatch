@@ -1,47 +1,29 @@
+@import '../partials/mixins';
+@import '../partials/variables';
+@import '../partials/layout';
+
 *{
     box-sizing: border-box;
-    font-family:"Avenir Next";
+    font-family:"Avenir Next" !important;
 }
 
-html{
+body {
+    background-color:aliceblue;
     height: 100vh;
     width: 100%;
     overflow: hidden;
 }
 
-body {
-    background-color:aliceblue
-}
-
 .test {
-    line-height: 1.3em;
-    
+    line-height: 1.3em;  
+    font-size: 24px;
     color: darkslategrey;
     border-radius: 20px;
     background-color:cornsilk;
-    width: 300px;
-    margin: 20px auto;
-    padding: 20px;
-}
+    width: 95%;
+    height: 95vh;
+    padding: 40px;
+    margin: 2% auto;
+} 
 
-.test::before {
-    content: 'YOLO';
-}
 
-.test2 {
-    padding: 20px 20px;    
-}
-
-.lel {
-    float: left;
-}
-
-#div1 {
-    float: left;
-    max-width: 500px;
-}
-
-#div2 {
-    float: right;
-    max-width: 200px;
-}

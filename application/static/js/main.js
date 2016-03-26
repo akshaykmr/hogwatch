@@ -2,10 +2,10 @@ console.log('js serving');
 
 if ("WebSocket" in window){
 	   //alert("WebSocket is supported by your Browser!");
-   var ws = new WebSocket("ws://10.211.55.9:8010/websocket/eth0/transfer_amount");
+   var ws = new WebSocket("ws://10.211.55.9:8010/websocket/eth0/transfer_rate");
 	
    ws.onopen = function()   {
-      ws.send('start')
+      ws.send('start');
       console.log('WebSocket open');
    };
    ws.onmessage = function (evt){ 
@@ -21,3 +21,10 @@ if ("WebSocket" in window){
    // The browser doesn't support WebSocket
    alert("WebSocket NOT supported by your Browser!");
 }
+
+var test= new Vue({
+   el: '#app',
+    data: {
+      message: 'Hello Vue.js!'
+    }
+ });
