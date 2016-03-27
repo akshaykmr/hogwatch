@@ -8,25 +8,35 @@
   <meta name="description" content="lel">
 
   <link rel="stylesheet" href="css/css_reset.css">
+  <link rel="stylesheet" href="css/nano.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <div class="test">
-        <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae quibusdam voluptatem error minima placeat, expedita saepe, consectetur cupiditate dolorum repellat perspiciatis quisquam nesciunt tempore temporibus. Sed maxime nostrum maiores qui.
-        </p>        
-        <br>        
-        <div id="app">
-         {{ message }}
-        </div>        
+    <div class="container">
+       
+       <div class="nano">
+          <div class="nano-content">
+              <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae quibusdam voluptatem error minima placeat, expedita saepe, consectetur cupiditate dolorum repellat perspiciatis quisquam nesciunt tempore temporibus. Sed maxime nostrum maiores qui.
+              </p>        
+              <br>        
+              <div id="app" >
+                  <div v-for="message in messages">{{ message.text }}</div>
+              </div> 
+          </div>           
+       </div>
+
+        <div id="charts"></div>        
     </div>
 
  
 
-
+  <script src="js/jquery.min.js"></script>
   <script src="js/vue.js"></script>
+  <script src="js/highstock.js"></script>
+  <script src="js/nanoScroller.js"></script>
   <script src="js/main.js"></script>
 
 </body>

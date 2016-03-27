@@ -30,6 +30,7 @@ setup(
     install_requires=[
         "bottle",
         'pywebview',
-        'gevent-websocket'
+        'gevent-websocket',
+	'netifaces'
     ],
 )

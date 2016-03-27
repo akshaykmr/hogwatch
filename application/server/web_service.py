@@ -2,6 +2,7 @@ import json, gevent
 from Queue import Queue
 from threading import Thread, Event
 from pprint import pprint
+import netifaces
 
 from bottle import (
     Bottle,
@@ -29,6 +30,10 @@ def web_service(
     @app.route('/')
     def home():
         redirect('/index.html')
+
+    @app.route('/interfaces')
+    def interfaces():
+        return {'interfaces': netifaces.interfaces()}
     
     if ws:
         connections_count=0
