@@ -1,6 +1,5 @@
 @import '../partials/mixins';
 @import '../partials/variables';
-@import '../partials/layout';
 
 
 $header-height: 50px;
@@ -50,6 +49,7 @@ body {
 }
 
 .top-header {
+    
     position: relative;
     height: $header-height;
     width: 96%;
@@ -58,6 +58,7 @@ body {
     margin-top: 10px;
     margin-bottom: 5px;
     div{
+        top:5px;
         position: absolute;
         display: inline;
         height: $header-height;
@@ -65,23 +66,33 @@ body {
     
     
     .heading{
-        top:0;
-        left: 0;
-        width: 50%;
-        background-color: chocolate;
+        left: 5px;
+        font-size: 32px;
+        width: 40%;
     }
     .transfer-total{
-        width: 25%;
+        width: 28%;        
+        svg{
+            width: 32px;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+
+        }
+        
+        div{
+            font-size: 26px;
+            margin-left: 40px;
+            margin-top: 2px;
+        }
     }
     .up{
         top:0;
         right: 0;
-        background-color: antiquewhite
     }
     .down{
         top:0;
-        right: 25%;
-        background-color: blue;
+        right: 28%;
     }
 }
 

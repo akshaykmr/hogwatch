@@ -1,16 +1,16 @@
-/* line 9, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 8, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 * {
   box-sizing: border-box;
   font-family: "Avenir Next" !important; }
 
-/* line 14, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 13, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 body {
   background-color: aliceblue;
   height: 100vh;
   width: 100%;
   overflow: hidden; }
 
-/* line 21, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 20, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano {
   line-height: 1.3em;
   font-size: 24px;
@@ -20,31 +20,31 @@ body {
   margin: 2% auto;
   height: 30% !important; }
 
-/* line 32, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 31, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano > .nano-content {
   width: 98%;
   margin: 0 auto; }
 
-/* line 33, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 32, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano > .nano-pane {
   background: #888; }
 
-/* line 34, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 33, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano > .nano-pane > .nano-slider {
   background: #111; }
 
-/* line 41, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 40, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 #charts {
   margin: 10px;
   min-height: 360px;
   height: 60%;
   min-width: 320px; }
 
-/* line 48, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 47, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .container {
   height: 95vh; }
 
-/* line 52, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 51, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .top-header {
   position: relative;
   height: 50px;
@@ -55,30 +55,39 @@ body {
   margin-bottom: 5px; }
   /* line 60, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .top-header div {
+    top: 5px;
     position: absolute;
     display: inline;
     height: 50px; }
-  /* line 67, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  /* line 68, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .top-header .heading {
-    top: 0;
-    left: 0;
-    width: 50%;
-    background-color: chocolate; }
+    left: 5px;
+    font-size: 32px;
+    width: 40%; }
   /* line 73, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .top-header .transfer-total {
-    width: 25%; }
-  /* line 76, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+    width: 28%; }
+    /* line 75, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+    .top-header .transfer-total svg {
+      width: 32px;
+      position: absolute;
+      top: 5px;
+      left: 5px; }
+    /* line 83, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+    .top-header .transfer-total div {
+      font-size: 26px;
+      margin-left: 40px;
+      margin-top: 2px; }
+  /* line 89, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .top-header .up {
     top: 0;
-    right: 0;
-    background-color: antiquewhite; }
-  /* line 81, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+    right: 0; }
+  /* line 93, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .top-header .down {
     top: 0;
-    right: 25%;
-    background-color: blue; }
+    right: 28%; }
 
-/* line 88, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 99, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 #highcharts-0 > svg > text {
   visibility: hidden; }
 

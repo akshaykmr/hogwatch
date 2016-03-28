@@ -12,18 +12,6 @@ $(function () {
     $('#charts').highcharts('StockChart', {
         chart : {
             //animation: false,
-            events : {
-                load : function () {
-
- /*                   // set up the updating of the chart each second
-                    var series = this.series[0];
-                    setInterval(function () {
-                        var x = (new Date()).getTime(), // current time
-                            y = Math.round(Math.random() * 100);
-                        series.addPoint([x, y], true, true);
-                    }, 1000);*/
-                }
-            }
         },
 
         rangeSelector: {
@@ -77,21 +65,6 @@ $(function () {
         },
 
         series : [
-/*            {
-                name : 'Random data',
-                data : (function () {
-                    // generate an array of random data
-                    var data = [], time = (new Date()).getTime(), i;
-
-                    for (i = -999; i <= 0; i += 1) {
-                        data.push([
-                            time + i * 1000,
-                            Math.round(Math.random() * 100)
-                        ]);
-                    }
-                    return data;
-                }())
-            }*/
         ]
     });
 
@@ -123,7 +96,7 @@ function seriesBlueprint(mode){
 }
 
 
-//to get all devices GET /interfaces
+//to get all devices GET /interfaces  :for now I am just using all available interfaces
 var defaultInterfaces=['all'];
 
 function getSocketURL(interface_list,mode){
@@ -134,10 +107,9 @@ function getSocketURL(interface_list,mode){
 
 if ("WebSocket" in window){
 
-    var interfaces=['all'];
+    var interfaces=['all'];   
     var rate= new WebSocket(getSocketURL(interfaces,'transfer_rate'));
-    //var amount= new WebSocket(getSocketURL(interfaces,'transfer_amount'));
-    
+
     var counter=0;
     var seen={};
     var latestLogs=[];
@@ -146,7 +118,11 @@ if ("WebSocket" in window){
         seen: seen,
         latestLogs: latestLogs,
         activeLog: -1, //-1 if total chart else uid
-        window: 0, //0 means all, else form window from minutes back to report_timestamp
+        window: 0, //0 means all, else form window from minutes back to report_timestamp,
+        total_kbps_in: 0,
+        total_kbps_out: 0,
+        total_mb_in: 0,
+        total_mb_out:0
     }
     
     rate.onopen=function(){
@@ -229,12 +205,47 @@ if ("WebSocket" in window){
             chart().xAxis[0].setExtremes(from,report.timestamp);
         }
         
+        transfer.total_kbps_in=report.total_in;
+        transfer.total_kbps_out=report.total_out;
+        rate.send('next');
     }
     rate.onclose=function(){
         console.log('rate ws closed')
     }
     
+    /*********************************/
     
+    var amount= new WebSocket(getSocketURL(interfaces,'transfer_amount'));
+    
+    amount.onopen=function(){
+        amount.send('start');
+        console.log('amount ws starting')
+    }
+    
+    amount.onmessage=function(evt){
+        var report=JSON.parse(evt.data);
+        //console.log(report);
+        
+        report.entries.forEach(function(entry){
+            if(seen[entry.process]!==undefined){
+                var log=latestLogs[seen[entry.process]];
+                log['mb_in']=entry['mb_in'];
+                log['mb_out']=entry['mb_out'];
+            }else{
+                //console.log('transfer amount could not be matched',entry)
+                //fix this | separate the amount and rate to different views?
+            }
+        })
+        
+        transfer.total_mb_in=report.total_in;
+        transfer.total_mb_out=report.total_out;
+        
+        amount.send('next');
+    }
+    
+    amount.onclose=function(){
+        console.log('amount ws was closed');
+    }
 }else{
     // The browser doesn't support WebSocket
     console.error("WebSocket NOT supported by your Browser!");
@@ -254,7 +265,7 @@ var testData= {
 
 var test= new Vue({
     el: '#app',
-    data: testData
+    data: transfer
 });
 
 $(".nano").nanoScroller({ alwaysVisible: true });
