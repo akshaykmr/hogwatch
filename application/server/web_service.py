@@ -39,8 +39,11 @@ def web_service(
         connections_count=0
 
         @app.route('/websocket/<device>/<mode>')
-        def handle_websocket(device='eth0',mode='transfer_rate'):
-            device_list= device.split('_')
+        def handle_websocket(device='all',mode='transfer_rate'):
+            if(device=='all'):
+                device_list=[]
+            else:
+                device_list= device.split('_')
 
             if debugMode:
                 pprint(device_list)

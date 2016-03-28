@@ -84,3 +84,7 @@ body {
         background-color: blue;
     }
 }
+
+#highcharts-0 > svg > text{
+    visibility: hidden;
+}

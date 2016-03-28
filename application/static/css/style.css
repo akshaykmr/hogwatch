@@ -78,4 +78,8 @@ body {
     right: 25%;
     background-color: blue; }
 
+/* line 88, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+#highcharts-0 > svg > text {
+  visibility: hidden; }
+
 /*# sourceMappingURL=style.css.map */
