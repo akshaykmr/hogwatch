@@ -27,18 +27,28 @@ $(function () {
         },
 
         rangeSelector: {
-            buttons: [{
-                count: 1,
-                type: 'minute',
-                text: '1M'
-            }, {
-                count: 5,
-                type: 'minute',
-                text: '5M'
-            }, {
-                type: 'all',
-                text: 'All'
-            }],
+            enabled: false,
+            buttons: [
+                {
+                    count: 1,
+                    type: 'minute',
+                    text: '1M'
+                }, 
+                {
+                    count: 5,
+                    type: 'minute',
+                    text: '5M'
+                }, 
+                {
+                    count: 30,
+                    type: 'minute',
+                    text: '30M'
+                }, 
+                {
+                    type: 'all',
+                    text: 'All'
+                }
+            ],
             inputEnabled: false,
             selected: 0
         },
@@ -130,7 +140,15 @@ if ("WebSocket" in window){
     
     var counter=0;
     var seen={};
-    var latest_logs=[];
+    var latestLogs=[];
+    
+    var transfer={
+        seen: seen,
+        latestLogs: latestLogs,
+        activeLog: -1, //-1 if total chart else uid
+        window: 0, //0 means all, else form window from minutes back to report_timestamp
+    }
+    
     rate.onopen=function(){
         rate.send('start');
         console.log('rate ws starting')
@@ -155,20 +173,31 @@ if ("WebSocket" in window){
             data : []
         });
     }
-
+    var initMoment= (new Date()).valueOf(); //GLOBAL INIT
+    
     rate.onmessage=function(evt){
         
-        function addEntryToSeries(entry,uid,timestamp){
+        var report = JSON.parse(evt.data);
+        //console.log(report);
+        
+        function addLogToSeries(entry,uid,timestamp){
             var series= getSeries(uid);
             series.download.addPoint([timestamp,entry['kbps_in']],false,false)
             series.upload.addPoint([timestamp,-1*entry['kbps_out']],false,false)
-            chart().redraw();
+            
+            if(transfer.activeLog===uid){
+                var from=latestLogs[uid].initMoment;
+                
+                if(transfer.window!==0){
+                    from= moment().subtract(transfer.window,'minutes').toDate().valueOf();  
+                }            
+                chart().xAxis[0].setExtremes(from,report.timestamp);                
+            }
         }
         
-        var report = JSON.parse(evt.data);
-        console.log(report);
-        
-        chart().series[0].addPoint([report.timestamp,report['total_in']],false,false);
+     
+          
+        chart().series[0].addPoint([report.timestamp,report['total_in']],false,false);        
         chart().series[1].addPoint([report.timestamp,-1*report['total_out']],false,false);
         
         report.entries.forEach(function(entry){
@@ -176,20 +205,29 @@ if ("WebSocket" in window){
                 entry.uid=counter;
                 seen[entry.process]=counter;
                 counter++;
-                latest_logs.push(entry);
+                entry.initMoment= (new Date()).valueOf();
+                latestLogs.push(entry);
                 
                 chart().addSeries(seriesBlueprint('download'));
                 chart().addSeries(seriesBlueprint('upload'));
-                addEntryToSeries(entry,entry.uid,report.timestamp)
+                addLogToSeries(entry,entry.uid,report.timestamp)
                 
             }else{
                 var uid=seen[entry.process];
-                var log=latest_logs[uid];
+                var log=latestLogs[uid];
                 log['kbps_in']=entry['kbps_in'];
                 log['kbps_out']=entry['kbps_out'];
-                addEntryToSeries(entry,uid,report.timestamp);
+                addLogToSeries(log,uid,report.timestamp);
             }
         });
+        
+        if(transfer.activeLog===-1){
+            var from=initMoment;
+            if(transfer.window!==0){
+                from= moment().subtract(transfer.window,'minutes').toDate().valueOf();  
+            }            
+            chart().xAxis[0].setExtremes(from,report.timestamp);
+        }
         
     }
     rate.onclose=function(){
