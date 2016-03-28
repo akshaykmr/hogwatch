@@ -2,6 +2,7 @@ import subprocess, sys
 from Queue import Queue
 from pprint import pprint
 from threading import Event
+import time
 
 #todo learn logging
 
@@ -85,6 +86,7 @@ class NethogsWatchdog :
                 if self.debug:
                     pprint(report)
                 else:
+                    report['timestamp']=int(round(time.time() * 1000))
                     bridge['queue'].put(report)
 
         p.stdout.close()
