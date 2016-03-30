@@ -2,7 +2,7 @@ import sys, webview
 
 def window(title='window',location='http://google.com'):
 	
-	webview.create_window(title,location, resizable=True);
+	webview.create_window(title,location, resizable=True,width=480,height=720);
 
 if __name__=='__main__':
 

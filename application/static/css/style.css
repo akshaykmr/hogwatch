@@ -105,7 +105,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: all 0.3s ease-out;
+  transition: all 0.2s ease-out;
   margin-top: 1px;
   margin-bottom: 6px; }
   /* line 117, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */

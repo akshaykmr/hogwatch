@@ -50,13 +50,12 @@ class NethogsWatchdog :
 
                 if(mode=='transfer_rate'):
                     #kbps out/in
-                    #meh I dont care for decimal precision with kbps
-                    entry['kbps_out']=int(float(split[1]))
-                    entry['kbps_in']=int(float(split[2]))
+                    entry['kbps_out']=round((float(split[1])),1)
+                    entry['kbps_in']=round((float(split[2])),1)
                 else: #mode is 'transfer_amount'
                     #MB out/in
-                    entry['mb_out']=int(float(split[1]))
-                    entry['mb_in']=int(float(split[2]))
+                    entry['mb_out']=round((float(split[1])),1)
+                    entry['mb_in']=round((float(split[2])),1)
 
                 entries.append(entry)
             else:
