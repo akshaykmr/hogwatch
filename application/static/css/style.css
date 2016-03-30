@@ -5,7 +5,7 @@
 
 /* line 13, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 body {
-  background-color: aliceblue;
+  background-color: white;
   height: 100vh;
   width: 100%;
   overflow: hidden; }
@@ -13,7 +13,7 @@ body {
 /* line 20, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano {
   line-height: 1.3em;
-  font-size: 24px;
+  font-size: 22px;
   color: darkslategrey;
   border-radius: 10px;
   width: 97%;
@@ -33,18 +33,18 @@ body {
 .nano > .nano-pane > .nano-slider {
   background: #111; }
 
-/* line 40, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 39, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 #charts {
   margin: 10px;
   min-height: 360px;
   height: 60%;
   min-width: 320px; }
 
-/* line 47, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 46, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .container {
   height: 95vh; }
 
-/* line 51, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 50, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .top-header {
   position: relative;
   height: 50px;
@@ -52,7 +52,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  color: #2c3e50; }
   /* line 60, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .top-header div {
     top: 5px;
@@ -90,5 +91,32 @@ body {
 /* line 99, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 #highcharts-0 > svg > text {
   visibility: hidden; }
+
+/* line 103, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+.log {
+  cursor: pointer;
+  background-color: slategray;
+  color: white;
+  border-radius: 3px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  height: 30px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease-out;
+  margin-top: 1px;
+  margin-bottom: 6px; }
+  /* line 117, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  .log.active {
+    background-color: white;
+    color: #2c3e50;
+    /*   box-shadow: 0 0 5px 2px #fff;
+        border: 1px solid #ababab;
+        border-radius: 5px;
+        outline: none;*/
+    border: 1px solid #ababab;
+    box-shadow: -1px 1px #ababab, -2px 2px #ababab, -3px 3px #ababab, -4px 4px #ababab, -5px 5px #ababab; }
 
 /*# sourceMappingURL=style.css.map */

@@ -38,8 +38,17 @@
        <div class="nano">
           <div class="nano-content">
 
-            <div class="table">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta cupiditate, illo, illum fugit alias fugiat temporibus libero perspiciatis accusantium consequatur obcaecati totam amet sit suscipit eos nisi eaque. Unde, magni.
+            <div class="logs">
+               <ul>
+                   <li 
+                       v-for="log in latestLogs | orderBy 'kbps_in' -1"
+                       track-by="uid"
+                       v-on:click="toggleActiveLog(log)">
+                       <div class="log" v-bind:class="{ 'active': log.isActive }">
+                           {{log.process}}  
+                       </div>                       
+                   </li>
+               </ul>
             </div>       
           </div>           
        </div>

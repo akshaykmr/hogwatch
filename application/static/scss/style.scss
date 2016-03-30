@@ -11,7 +11,7 @@ $header-height: 50px;
 }
 
 body {
-    background-color:aliceblue;
+    background-color:white;
     height: 100vh;
     width: 100%;
     overflow: hidden;
@@ -19,7 +19,7 @@ body {
 
 .nano {
     line-height: 1.3em;  
-    font-size: 24px;
+    font-size: 22px;
     color: darkslategrey;
     border-radius: 10px;
     width: 97%;
@@ -34,8 +34,7 @@ body {
 
 
 
-.table {
-}
+
 
 #charts {
     margin: 10px;
@@ -57,6 +56,7 @@ body {
     margin-right: auto;
     margin-top: 10px;
     margin-bottom: 5px;
+    color: #2c3e50;
     div{
         top:5px;
         position: absolute;
@@ -99,3 +99,38 @@ body {
 #highcharts-0 > svg > text{
     visibility: hidden;
 }
+
+.log {
+    cursor: pointer;
+    background-color: slategray;
+    color: white;
+    border-radius: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    height: 30px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    transition: all 0.3s ease-out;
+    
+    &.active {
+        background-color: white;
+        color: #2c3e50; 
+     /*   box-shadow: 0 0 5px 2px #fff;
+        border: 1px solid #ababab;
+        border-radius: 5px;
+        outline: none;*/
+        border: 1px solid #ababab;
+        box-shadow:  -1px 1px #ababab,
+            -2px 2px #ababab,
+            -3px 3px #ababab,
+            -4px 4px #ababab,
+            -5px 5px #ababab
+        
+    };
+    margin-top: 1px;
+    margin-bottom: 6px;
+}
+
+

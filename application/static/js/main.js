@@ -179,6 +179,7 @@ if ("WebSocket" in window){
         report.entries.forEach(function(entry){
             if(seen[entry.process]===undefined){
                 entry.uid=counter;
+                entry.isActive=false;
                 seen[entry.process]=counter;
                 counter++;
                 entry.initMoment= (new Date()).valueOf();
@@ -187,6 +188,9 @@ if ("WebSocket" in window){
                 chart().addSeries(seriesBlueprint('download'));
                 chart().addSeries(seriesBlueprint('upload'));
                 addLogToSeries(entry,entry.uid,report.timestamp)
+                setTimeout(function(){
+                    $(".nano").nanoScroller();
+                },100)
                 
             }else{
                 var uid=seen[entry.process];
@@ -251,21 +255,48 @@ if ("WebSocket" in window){
     console.error("WebSocket NOT supported by your Browser!");
 }
 
-var testData= {
-    messages: [
-        {
-            text: 'ok'
-        },
-        {
-            text: 'not ok'
-        }
-    ],
-    ok: false
-};
 
-var test= new Vue({
+var app= new Vue({
     el: '#app',
-    data: transfer
+    data: transfer,
+    
+    methods: {
+        toggleActiveLog: function(log){
+            
+            function setVisibility(uid,visible){
+                var series=getSeries(uid);
+                for(var plot in series){
+                    if(visible===false)
+                        series[plot].hide();
+                    else
+                        series[plot].show()
+                }  
+            }
+            
+            if(this.activeLog===log.uid){                
+                setVisibility(this.activeLog,false)
+                log.isActive=false;
+                
+                chart().series[0].show();
+                chart().series[1].show();
+                this.activeLog=-1;
+                
+            }else{
+                if(this.activeLog===-1){
+                    chart().series[0].hide();
+                    chart().series[1].hide();
+                }else{
+                    this.latestLogs[this.activeLog].isActive=false;
+                    setVisibility(this.activeLog,false)                    
+                }               
+                
+                setVisibility(log.uid,true);
+                log.isActive=true;
+                this.activeLog=log.uid;
+                
+            }
+        }
+    }
 });
 
 $(".nano").nanoScroller({ alwaysVisible: true });
