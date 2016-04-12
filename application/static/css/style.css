@@ -1,16 +1,46 @@
-/* line 6, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* oxygen-300 - latin */
+@font-face {
+  font-family: 'Oxygen';
+  font-style: normal;
+  font-weight: 300;
+  src: url("/fonts/oxygen/oxygen-v5-latin-300.eot");
+  /* IE9 Compat Modes */
+  src: local("Oxygen Light"), local("Oxygen-Light"), url("/fonts/oxygen/oxygen-v5-latin-300.eot?#iefix") format("embedded-opentype"), url("/fonts/oxygen/oxygen-v5-latin-300.woff2") format("woff2"), url("/fonts/oxygen/oxygen-v5-latin-300.woff") format("woff"), url("/fonts/oxygen/oxygen-v5-latin-300.ttf") format("truetype"), url("/fonts/oxygen/oxygen-v5-latin-300.svg#Oxygen") format("svg");
+  /* Legacy iOS */ }
+
+/* oxygen-regular - latin */
+@font-face {
+  font-family: 'Oxygen';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/oxygen/oxygen-v5-latin-regular.eot");
+  /* IE9 Compat Modes */
+  src: local("Oxygen"), local("Oxygen-Regular"), url("/fonts/oxygen/oxygen-v5-latin-regular.eot?#iefix") format("embedded-opentype"), url("/fonts/oxygen/oxygen-v5-latin-regular.woff2") format("woff2"), url("/fonts/oxygen/oxygen-v5-latin-regular.woff") format("woff"), url("/fonts/oxygen/oxygen-v5-latin-regular.ttf") format("truetype"), url("/fonts/oxygen/oxygen-v5-latin-regular.svg#Oxygen") format("svg");
+  /* Legacy iOS */ }
+
+/* oxygen-700 - latin */
+@font-face {
+  font-family: 'Oxygen';
+  font-style: normal;
+  font-weight: 700;
+  src: url("/fonts/oxygen/oxygen-v5-latin-700.eot");
+  /* IE9 Compat Modes */
+  src: local("Oxygen Bold"), local("Oxygen-Bold"), url("/fonts/oxygen/oxygen-v5-latin-700.eot?#iefix") format("embedded-opentype"), url("/fonts/oxygen/oxygen-v5-latin-700.woff2") format("woff2"), url("/fonts/oxygen/oxygen-v5-latin-700.woff") format("woff"), url("/fonts/oxygen/oxygen-v5-latin-700.ttf") format("truetype"), url("/fonts/oxygen/oxygen-v5-latin-700.svg#Oxygen") format("svg");
+  /* Legacy iOS */ }
+
+/* line 46, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 * {
   box-sizing: border-box;
   font-family: "Avenir Next","Oxygen","Helvetica" !important; }
 
-/* line 11, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 51, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 body {
   background-color: white;
   height: 100vh;
   width: 100%;
   overflow: hidden; }
 
-/* line 18, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 58, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano {
   line-height: 1.3em;
   font-size: 22px;
@@ -20,31 +50,31 @@ body {
   margin: 2% auto;
   height: calc(30% - 30px) !important; }
 
-/* line 29, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 69, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano > .nano-content {
   width: 98%;
   margin: 0 auto; }
 
-/* line 30, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 70, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano > .nano-pane {
   background: #888; }
 
-/* line 31, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 71, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .nano > .nano-pane > .nano-slider {
   background: #111; }
 
-/* line 37, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 77, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 #charts {
   margin: 10px;
   margin-bottom: 0;
   height: calc(70% - 65px);
   min-width: 320px; }
 
-/* line 44, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 84, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .container {
   height: 100vh; }
 
-/* line 48, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 88, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .top-header {
   position: relative;
   height: 30px;
@@ -54,23 +84,23 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
   color: #2c3e50; }
-  /* line 59, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  /* line 99, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .top-header div {
     top: 5px;
     position: absolute;
     display: inline;
     height: 30px; }
-  /* line 66, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  /* line 106, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .top-header .heading {
     left: 5px;
     font-size: 1.4em;
     width: 40%; }
 
-/* line 73, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 113, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 #highcharts-0 > svg > text {
   visibility: hidden; }
 
-/* line 77, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 117, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .log {
   cursor: pointer;
   background-color: slategray;
@@ -86,7 +116,7 @@ body {
   transition: all 0.2s ease-out;
   margin-top: 1px;
   margin-bottom: 6px; }
-  /* line 91, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  /* line 131, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .log.active {
     background-color: white;
     color: #2c3e50;
@@ -97,7 +127,7 @@ body {
     border: 1px solid #ababab;
     box-shadow: -1px 1px #ababab, -2px 2px #ababab, -3px 3px #ababab, -4px 4px #ababab, -5px 5px #ababab; }
 
-/* line 111, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 151, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .info-bar {
   position: absolute;
   bottom: 0px;
@@ -106,27 +136,27 @@ body {
   width: 96%;
   height: 40px;
   color: #2c3e50; }
-  /* line 121, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  /* line 161, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .info-bar div {
     position: absolute;
     height: 100%;
     display: inline; }
-  /* line 127, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  /* line 167, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .info-bar .transfer-total {
     width: 50%; }
-    /* line 129, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+    /* line 169, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
     .info-bar .transfer-total svg {
       width: 28px;
       position: absolute;
       top: 5px;
       left: 5px; }
-    /* line 136, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+    /* line 176, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
     .info-bar .transfer-total .rate {
       font-size: 1.1em;
       margin-left: 40px;
       margin-top: 4px;
       width: 70%; }
-    /* line 143, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+    /* line 183, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
     .info-bar .transfer-total .amount {
       visibility: hidden;
       position: absolute;
@@ -136,16 +166,16 @@ body {
       width: calc(50% - 40px);
       background-color: #2c3e50;
       border-radius: 5px; }
-  /* line 154, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  /* line 194, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .info-bar .up {
     top: 0;
     right: 0; }
-  /* line 158, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+  /* line 198, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
   .info-bar .down {
     top: 0;
     right: 50%; }
 
-/* line 164, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
+/* line 204, /Users/akshay/mnt/elementary/Documents/hogwatch/application/static/scss/style.scss */
 .app {
   position: relative;
   width: 100%;
