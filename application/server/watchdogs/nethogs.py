@@ -2,6 +2,7 @@ import subprocess, sys
 from Queue import Queue
 from pprint import pprint
 from threading import Event
+from decimal import *
 import time
 
 #todo learn logging
@@ -48,14 +49,15 @@ class NethogsWatchdog :
                 entry={}
                 entry['process']=split[0]
 
+
                 if(mode=='transfer_rate'):
                     #kbps out/in
-                    entry['kbps_out']=round((float(split[1])),1)
-                    entry['kbps_in']=round((float(split[2])),1)
+                    entry['kbps_out']=round(Decimal((float(split[1]))),1)
+                    entry['kbps_in']=round(Decimal((float(split[2]))),1)
                 else: #mode is 'transfer_amount'
                     #MB out/in
-                    entry['mb_out']=round((float(split[1])),1)
-                    entry['mb_in']=round((float(split[2])),1)
+                    entry['mb_out']=round(Decimal((float(split[1]))),1)
+                    entry['mb_in']=round(Decimal((float(split[2]))),1)
 
                 entries.append(entry)
             else:
