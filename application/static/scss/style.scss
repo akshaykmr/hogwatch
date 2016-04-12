@@ -1,9 +1,7 @@
 @import '../partials/mixins';
 @import '../partials/variables';
 
-
-$header-height: 50px;
-
+$header-height: 30px;
 
 *{
     box-sizing: border-box;
@@ -24,7 +22,7 @@ body {
     border-radius: 10px;
     width: 97%;
     margin: 2% auto;
-    height: 30% !important;
+    height: calc(30% - 30px) !important;
     
 }
 
@@ -38,13 +36,13 @@ body {
 
 #charts {
     margin: 10px;
-    min-height: 360px;
-    height: 50%;
+    margin-bottom: 0;
+    height: calc(70% - 65px);
     min-width: 320px;
 }
 
 .container {
-   height: 95vh;
+   height: 100vh;
 }
 
 .top-header {
@@ -54,7 +52,7 @@ body {
     width: 96%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 5px;
     color: #2c3e50;
     div{
@@ -67,13 +65,13 @@ body {
     
     .heading{
         left: 5px;
-        font-size: 32px;
-        width: 40%;
+        font-size: 1.4em; 
+        width: 20%;
     }
     .transfer-total{
-        width: 28%;        
+        width: 40%;        
         svg{
-            width: 32px;
+            width: 28px;
             position: absolute;
             top: 5px;
             left: 5px;
@@ -81,9 +79,13 @@ body {
         }
         
         div{
-            font-size: 26px;
+            font-size: 1.1em;
             margin-left: 40px;
-            margin-top: 2px;
+            margin-top: 4px;
+        }
+        
+        span{
+            float: right;
         }
     }
     .up{
@@ -126,35 +128,56 @@ body {
             -2px 2px #ababab,
             -3px 3px #ababab,
             -4px 4px #ababab,
-            -5px 5px #ababab
+            -5px 5px #ababab;
         
     };
     margin-top: 1px;
     margin-bottom: 6px;
 }
-
-
-
-.transfer {
-    position: relative;
-    width: 100%;
-    height: 10%;
-    min-height: 10%;
+.info-bar {
     
-    .sent{
+    position: absolute;
+    bottom: 0px;
+    left: 2%;
+    margin: 5px auto;
+    width: 96%;
+    height: 40px;
+    color: #2c3e50;
+    
+    div{
         position: absolute;
-        left: 0;
-        width: 50%;
         height: 100%;
-        background-color: darkcyan
+        display: inline;
     }
     
-    .recieved
-        position: absolute;
+    .transfer-total{
+        width: 50%;        
+        svg{
+            width: 28px;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+
+        }
+
+        div{
+            font-size: 1.1em;
+            margin-left: 40px;
+            margin-top: 4px;
+        }
+    }
+    .up{
         top:0;
         right: 0;
-        width: 50%;
-        height: 100%;
-        background-color:burlywood;
     }
+    .down{
+        top:0;
+        right: 50%;
+    }
+}
+
+.app {
+    position: relative;
+    width: 100%;
+    height: 100vh;
 }

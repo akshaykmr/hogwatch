@@ -74,6 +74,13 @@ function chart(){
     return $('#charts').highcharts();
 }
 
+function fixPrecision(num,precision){
+    if(typeof precision==='undefined')
+        precision=2;
+    
+    return parseFloat(num.toFixed(precision));
+}
+
 function getSeries(uid){
     return {
         download: chart().series[(uid+1)*2],
@@ -154,6 +161,8 @@ if ("WebSocket" in window){
     rate.onmessage=function(evt){
         
         var report = JSON.parse(evt.data);
+        report.total_in=fixPrecision(report.total_in);
+        report.total_out=fixPrecision(report.total_out);
         //console.log(report);
         
         function addLogToSeries(entry,uid,timestamp){
@@ -177,6 +186,8 @@ if ("WebSocket" in window){
         chart().series[1].addPoint([report.timestamp,-1*report['total_out']],false,false);
         
         report.entries.forEach(function(entry){
+            entry.kbps_in=fixPrecision(entry.kbps_in);
+            entry.kbps_out=fixPrecision(entry.kbps_out);
             if(seen[entry.process]===undefined){
                 entry.uid=counter;
                 entry.isActive=false;
@@ -229,8 +240,12 @@ if ("WebSocket" in window){
     amount.onmessage=function(evt){
         var report=JSON.parse(evt.data);
         //console.log(report);
+        report.total_in=fixPrecision(report.total_in);
+        report.total_out=fixPrecision(report.total_out);
         
         report.entries.forEach(function(entry){
+            entry.mb_in=fixPrecision(entry.mb_in);
+            entry.mb_out=fixPrecision(entry.mb_out);
             if(seen[entry.process]!==undefined){
                 var log=latestLogs[seen[entry.process]];
                 log['mb_in']=entry['mb_in'];
@@ -255,10 +270,22 @@ if ("WebSocket" in window){
     console.error("WebSocket NOT supported by your Browser!");
 }
 
-
+var format= function(kbps){
+    if(kbps/1000>1.0)
+        return (kbps/1000).toFixed(2) +' mb/s';
+    else return kbps.toString() + ' kb/s'
+}
 var app= new Vue({
     el: '#app',
     data: transfer,
+    computed: {
+      total_kbps_in_formatted: function(){
+        return format(this.total_kbps_in);
+      },
+      total_kbps_out_formatted: function(){
+        return format(this.total_kbps_out); 
+      }
+    },
     
     methods: {
         toggleActiveLog: function(log){
