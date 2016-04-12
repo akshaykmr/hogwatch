@@ -1,11 +1,91 @@
 @import '../partials/mixins';
 @import '../partials/variables';
 
+/* oxygen-300 - latin */
+@font-face {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 300;
+    src: url('/fonts/oxygen/oxygen-v5-latin-300.eot'); /* IE9 Compat Modes */
+    src: local('Oxygen Light'), local('Oxygen-Light'),
+        url('/fonts/oxygen/oxygen-v5-latin-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('/fonts/oxygen/oxygen-v5-latin-300.woff2') format('woff2'), /* Super Modern Browsers */
+        url('/fonts/oxygen/oxygen-v5-latin-300.woff') format('woff'), /* Modern Browsers */
+        url('/fonts/oxygen/oxygen-v5-latin-300.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('/fonts/oxygen/oxygen-v5-latin-300.svg#Oxygen') format('svg'); /* Legacy iOS */
+}
+/* oxygen-regular - latin */
+@font-face {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/oxygen/oxygen-v5-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Oxygen'), local('Oxygen-Regular'),
+        url('/fonts/oxygen/oxygen-v5-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('/fonts/oxygen/oxygen-v5-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+        url('/fonts/oxygen/oxygen-v5-latin-regular.woff') format('woff'), /* Modern Browsers */
+        url('/fonts/oxygen/oxygen-v5-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('/fonts/oxygen/oxygen-v5-latin-regular.svg#Oxygen') format('svg'); /* Legacy iOS */
+}
+/* oxygen-700 - latin */
+@font-face {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/oxygen/oxygen-v5-latin-700.eot'); /* IE9 Compat Modes */
+    src: local('Oxygen Bold'), local('Oxygen-Bold'),
+        url('/fonts/oxygen/oxygen-v5-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+        url('/fonts/oxygen/oxygen-v5-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+        url('/fonts/oxygen/oxygen-v5-latin-700.woff') format('woff'), /* Modern Browsers */
+        url('/fonts/oxygen/oxygen-v5-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+        url('/fonts/oxygen/oxygen-v5-latin-700.svg#Oxygen') format('svg'); /* Legacy iOS */
+}
+
 $header-height: 30px;
 
 *{
     box-sizing: border-box;
-    font-family:"Avenir Next","Oxygen","Helvetica" !important;
+    font-family:"Avenir Next","Oxygen","Helvetica" !important
+
+        /* oxygen-300 - latin */
+@font-face {
+  font-family: 'Oxygen';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/fonts/oxygen/oxygen-v5-latin-300.eot'); /* IE9 Compat Modes */
+  src: local('Oxygen Light'), local('Oxygen-Light'),
+       url('/fonts/oxygen/oxygen-v5-latin-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/oxygen/oxygen-v5-latin-300.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/oxygen/oxygen-v5-latin-300.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/oxygen/oxygen-v5-latin-300.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/oxygen/oxygen-v5-latin-300.svg#Oxygen') format('svg'); /* Legacy iOS */
+}
+/* oxygen-regular - latin */
+@font-face {
+  font-family: 'Oxygen';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/oxygen/oxygen-v5-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Oxygen'), local('Oxygen-Regular'),
+       url('/fonts/oxygen/oxygen-v5-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/oxygen/oxygen-v5-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/oxygen/oxygen-v5-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/oxygen/oxygen-v5-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/oxygen/oxygen-v5-latin-regular.svg#Oxygen') format('svg'); /* Legacy iOS */
+}
+/* oxygen-700 - latin */
+@font-face {
+  font-family: 'Oxygen';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/oxygen/oxygen-v5-latin-700.eot'); /* IE9 Compat Modes */
+  src: local('Oxygen Bold'), local('Oxygen-Bold'),
+       url('/fonts/oxygen/oxygen-v5-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/oxygen/oxygen-v5-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/fonts/oxygen/oxygen-v5-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('/fonts/oxygen/oxygen-v5-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/oxygen/oxygen-v5-latin-700.svg#Oxygen') format('svg'); /* Legacy iOS */
+};
 }
 
 body {
