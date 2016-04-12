@@ -273,7 +273,7 @@ if ("WebSocket" in window){
 }
 
 var format= function(kbps){
-    if(kbps/1000>1.0)
+    if(kbps/1000>=1.0)
         return (kbps/1000).toFixed(2) +' mb/s';
     else return kbps.toString() + ' kb/s'
 }
@@ -338,6 +338,24 @@ var app= new Vue({
                 log.isActive=true;
                 this.activeLog=log.uid;
                 
+            }
+        },
+        toggleWindowState: function(){
+            if(this.paused)
+                this.paused=false;
+            else
+                this.paused=true;
+        },
+        windowLength:function(length){
+            if(this.window===length){
+                this.window=0;
+                $('.range').removeClass('active');
+                $('#range-0').addClass('active');
+            }else{
+                $('.range').removeClass('active');
+                this.window=length;
+                var selector='#range-'+length.toString();
+                $(selector).addClass('active');
             }
         }
     }

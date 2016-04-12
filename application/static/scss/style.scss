@@ -61,12 +61,13 @@ body {
     color: darkslategrey;
     border-radius: 10px;
     width: 98%;
-    margin: 2% auto;
+    margin: 5px auto;
+    margin-top: 18px;
     height: calc(30% - 30px) !important;
     
 }
 
-.nano > .nano-content { width: 98%; margin: 0 auto;}
+.nano > .nano-content { width:99%; margin:0 auto;}
 .nano > .nano-pane   { background: #888; }
 .nano > .nano-pane > .nano-slider { background: #111; }
 
@@ -208,28 +209,6 @@ body {
     height: 100vh;
 }
 
-
-
-
-section.press button {
-    color: #fff;
-    background-color: #6496c8;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 10px #27496d;
-}
-
-section.press button:hover,
-section.press button.hover {
-    background-color: #417cb8
-}
-
-section.press button:active,
-section.press button.active {
-    background-color: #417cb8;
-    box-shadow: 0 5px #27496d;
-    transform: translateY(5px);
-}
 .window-range-selector {
     position: absolute;
     top: 0;
@@ -238,18 +217,31 @@ section.press button.active {
     height: 40px;
     
     div{
+        cursor: pointer;
         display: inline;
         position: absolute;
-        height: 100%;
+        height: 45px;
         width: 40px;
-        top: 0;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        background-color: black;
+        top: -5px;
+        border: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
         color: white;
-        padding-top: 10px;
+        padding-top: 15px;
         text-align: center;
+        background-color: #6496c8;
+        box-shadow: 0 5px #27496d;
+        
+        &.active{
+            background-color: #417cb8;
+            box-shadow: 0 5px #27496d;
+            transform: translateY(5px);
+        }
     }    
+    
+    div:hover{
+        background-color: #417cb8;
+    }
     
     .state{
         
@@ -258,7 +250,7 @@ section.press button.active {
         svg{
             position: absolute;
             width: 90%;
-            top:5%;
+            top:calc(5% + 5px);
             left: 5%;
         }
     }
@@ -266,18 +258,18 @@ section.press button.active {
     .divider{
         left: 40px;
         width: 20px;
-        background-color: transparent;
+        display: none;
     }
     
-    #full-range{
+    #range-0{
         left: 60px;
     }
     
-    #range-5m{
+    #range-5{
         left: 100px;
     }
     
-    #range-30m{
+    #range-30{
         left: 140px;
     }
     
