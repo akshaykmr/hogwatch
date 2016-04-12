@@ -5,7 +5,7 @@ $header-height: 30px;
 
 *{
     box-sizing: border-box;
-    font-family:"Avenir Next" !important;
+    font-family:"Avenir Next","Oxygen","Helvetica" !important;
 }
 
 body {
@@ -55,6 +55,7 @@ body {
     margin-top: 5px;
     margin-bottom: 5px;
     color: #2c3e50;
+    
     div{
         top:5px;
         position: absolute;
@@ -62,39 +63,10 @@ body {
         height: $header-height;
     }
     
-    
     .heading{
         left: 5px;
-        font-size: 1.4em; 
-        width: 20%;
-    }
-    .transfer-total{
-        width: 40%;        
-        svg{
-            width: 28px;
-            position: absolute;
-            top: 5px;
-            left: 5px;
-
-        }
-        
-        div{
-            font-size: 1.1em;
-            margin-left: 40px;
-            margin-top: 4px;
-        }
-        
-        span{
-            float: right;
-        }
-    }
-    .up{
-        top:0;
-        right: 0;
-    }
-    .down{
-        top:0;
-        right: 28%;
+        font-size: 1.4em;
+        width: 40%;
     }
 }
 
@@ -134,6 +106,8 @@ body {
     margin-top: 1px;
     margin-bottom: 6px;
 }
+
+
 .info-bar {
     
     position: absolute;
@@ -157,14 +131,25 @@ body {
             position: absolute;
             top: 5px;
             left: 5px;
-
         }
 
-        div{
+        .rate{
             font-size: 1.1em;
             margin-left: 40px;
             margin-top: 4px;
+            width: 70%;
         }
+        
+        .amount{
+                visibility: hidden;
+                position: absolute;
+                height: 32px;
+                top:-5px;
+                right: 40px;
+                width: calc(50% - 40px);
+                background-color: #2c3e50;
+                border-radius: 5px;
+            }
     }
     .up{
         top:0;
