@@ -175,8 +175,9 @@ if ("WebSocket" in window){
                 
                 if(transfer.window!==0){
                     from= moment().subtract(transfer.window,'minutes').toDate().valueOf();  
-                }            
-                chart().xAxis[0].setExtremes(from,report.timestamp);                
+                }
+                if(!transfer.paused)
+                    chart().xAxis[0].setExtremes(from,report.timestamp);                
             }
         }
         
@@ -216,8 +217,9 @@ if ("WebSocket" in window){
             var from=initMoment;
             if(transfer.window!==0){
                 from= moment().subtract(transfer.window,'minutes').toDate().valueOf();  
-            }            
-            chart().xAxis[0].setExtremes(from,report.timestamp);
+            }
+            if(!transfer.paused)
+                chart().xAxis[0].setExtremes(from,report.timestamp);
         }
         
         transfer.total_kbps_in=report.total_in;
@@ -275,15 +277,30 @@ var format= function(kbps){
         return (kbps/1000).toFixed(2) +' mb/s';
     else return kbps.toString() + ' kb/s'
 }
+
+
+transfer.paused=false;
 var app= new Vue({
     el: '#app',
     data: transfer,
     computed: {
       total_kbps_in_formatted: function(){
-        return format(this.total_kbps_in);
+        var rate;
+        if(this.activeLog===-1)
+            rate=this.total_kbps_in;
+        else{
+            rate=this.latestLogs[this.activeLog].kbps_in; 
+        }
+        return format(rate);
       },
       total_kbps_out_formatted: function(){
-        return format(this.total_kbps_out); 
+        var rate;
+        if(this.activeLog===-1)
+            rate=this.total_kbps_out;
+        else{
+            rate=this.latestLogs[this.activeLog].kbps_out;  
+        }
+        return format(rate); 
       }
     },
     

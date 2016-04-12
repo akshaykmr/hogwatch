@@ -60,7 +60,7 @@ body {
     font-size: 22px;
     color: darkslategrey;
     border-radius: 10px;
-    width: 97%;
+    width: 98%;
     margin: 2% auto;
     height: calc(30% - 30px) !important;
     
@@ -202,7 +202,84 @@ body {
 }
 
 .app {
-    position: relative;
+    position: absolute;
+    top:0;
     width: 100%;
     height: 100vh;
 }
+
+
+
+
+section.press button {
+    color: #fff;
+    background-color: #6496c8;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px #27496d;
+}
+
+section.press button:hover,
+section.press button.hover {
+    background-color: #417cb8
+}
+
+section.press button:active,
+section.press button.active {
+    background-color: #417cb8;
+    box-shadow: 0 5px #27496d;
+    transform: translateY(5px);
+}
+.window-range-selector {
+    position: absolute;
+    top: 0;
+    right: 3%;
+    width: 180px;
+    height: 40px;
+    
+    div{
+        display: inline;
+        position: absolute;
+        height: 100%;
+        width: 40px;
+        top: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: black;
+        color: white;
+        padding-top: 10px;
+        text-align: center;
+    }    
+    
+    .state{
+        
+        left: 0;
+        
+        svg{
+            position: absolute;
+            width: 90%;
+            top:5%;
+            left: 5%;
+        }
+    }
+    
+    .divider{
+        left: 40px;
+        width: 20px;
+        background-color: transparent;
+    }
+    
+    #full-range{
+        left: 60px;
+    }
+    
+    #range-5m{
+        left: 100px;
+    }
+    
+    #range-30m{
+        left: 140px;
+    }
+    
+}
+
