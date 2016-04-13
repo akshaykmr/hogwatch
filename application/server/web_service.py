@@ -17,6 +17,11 @@ from bottle import (
     abort
 )
 
+local_path=os.path.dirname(os.path.abspath('web_service.py'))
+path_for_static_assets=os.path.join(local_path,'static')
+path_for_static_assets += '/'
+print path_for_static_assets
+
 from watchdogs.nethogs import NethogsWatchdog
 
 def web_service(
@@ -81,13 +86,11 @@ def web_service(
 
     @app.route('/<filename:path>')
     def send_static(filename):
-        abs_path=os.path.dirname(os.path.abspath('web_service.py'))
-        #print abs_path
-        static_root=os.path.join(abs_path,'static')
-        #print static_root
+        
+        print path_for_static_assets
         return static_file(
             filename,
-            root='/home/akshay/Documents/hogwatch/application/static/'
+            root=path_for_static_assets
         )
 
     if ws:
