@@ -20,7 +20,7 @@ from bottle import (
 local_path=os.path.dirname(os.path.abspath('web_service.py'))
 from sys import platform as _platform
 if _platform == "linux" or _platform == "linux2":
-    path_for_static_assets=os.path.join(local_path,'static')
+    path_for_static_assets=os.path.join(local_path,'application','server','static')
 elif _platform == "darwin":
     path_for_static_assets=os.path.join(local_path,'application','server','static')
 elif _platform == "win32":
