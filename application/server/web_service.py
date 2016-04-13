@@ -3,6 +3,7 @@ from Queue import Queue
 from threading import Thread, Event
 from pprint import pprint
 import netifaces
+import os
 
 from bottle import (
     Bottle,
@@ -80,17 +81,14 @@ def web_service(
 
     @app.route('/<filename:path>')
     def send_static(filename):
+        abs_path=os.path.dirname(os.path.abspath('web_service.py'))
+        #print abs_path
+        static_root=os.path.join(abs_path,'static')
+        #print static_root
         return static_file(
             filename,
             root='/home/akshay/Documents/hogwatch/application/static/'
         )
-
-        ## ^^ have to use full path for static folder. relative one will
-        ## not work with run.py -- NEED TO FIX 
-
-
-
-
 
     if ws:
         from gevent.pywsgi import WSGIServer
@@ -106,4 +104,4 @@ def web_service(
 
 if __name__ == '__main__':
     web_service(ws=True)
-    #todo kill threads on sigint
+    #todo kill threads on kill signal

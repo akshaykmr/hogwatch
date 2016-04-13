@@ -1,6 +1,7 @@
 from Queue import Queue
 from threading import Thread
 from pprint import pprint
+import sys
 
 from application.server.web_service import web_service
 #from application.watchdogs.nethogs import NethogsWatchdog
@@ -9,25 +10,15 @@ from application.server.web_service import web_service
 
 if __name__=='__main__':
 
-    # q=Queue()
-    # devices=['eth0']
-    # eth0=NethogsWatchdog([q],devices)
-    server=Thread(
-        target=web_service
-    )
-    # transfer_rate = Thread(
-    #     target=eth0.watch_transfer,
-    #     args=('transfer_rate',)
-    # )
+    if(len(sys.argv)==2 and sys.argv[1]=='server'):
+        web_service()
+    else :
+        server=Thread(
+            target=web_service
+        )
 
-    server.daemon=True
-    server.start()
-    # transfer_rate.daemon=True
-    # transfer_rate.start()
-    print 'threads running'
+        server.daemon=True
+        server.start()
+        from application.view.window import window
 
-
-
-    from application.view.window import window
-
-    window('hogwatch','http://10.211.55.9:8010')
+        window('hogwatch','http://localhost:8010/index.html')

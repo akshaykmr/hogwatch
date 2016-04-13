@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     # Application name:
-    name="bandwidth_monitor",
+    name="hogwatch",
 
     # Version number (initial):
     version="0.1.0",
@@ -18,11 +18,11 @@ setup(
     include_package_data=True,
 
     # Details
-    url="http://localhost:8080",
+    url="https://github.com/akshayKMR/hogwatch",
 
     #
     license="LICENSE.txt",
-    description="Useful towel-related stuff.",
+    description="bandwidth monitoring tool",
 
     long_description=open("README.txt").read(),
 
@@ -31,6 +31,6 @@ setup(
         "bottle",
         'pywebview',
         'gevent-websocket',
-	'netifaces'
+	    'netifaces'
     ],
 )
