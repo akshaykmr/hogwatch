@@ -21,4 +21,4 @@ if __name__=='__main__':
         server.start()
         from application.view.window import window
 
-        window('hogwatch','http://localhost:8010/index.html')
+        window('hogwatch','http://127.0.0.1:8010/index.html')

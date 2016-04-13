@@ -18,7 +18,14 @@ from bottle import (
 )
 
 local_path=os.path.dirname(os.path.abspath('web_service.py'))
-path_for_static_assets=os.path.join(local_path,'static')
+from sys import platform as _platform
+if _platform == "linux" or _platform == "linux2":
+    path_for_static_assets=os.path.join(local_path,'static')
+elif _platform == "darwin":
+    path_for_static_assets=os.path.join(local_path,'application','server','static')
+elif _platform == "win32":
+    pass
+
 path_for_static_assets += '/'
 print path_for_static_assets
 
@@ -87,7 +94,6 @@ def web_service(
     @app.route('/<filename:path>')
     def send_static(filename):
         
-        print path_for_static_assets
         return static_file(
             filename,
             root=path_for_static_assets

@@ -9,5 +9,5 @@ if __name__=='__main__':
 	if(len(sys.argv)==3):
 		window(sys.argv[1],sys.argv[2])
 	else:
-		print 'using http://localhost:8080 as view'
-		window('bandwidth monitor',location='http://localhost:8080/index.html')
+		print 'using http://localhost:8010 as view'
+		window('bandwidth monitor',location='http://localhost:8010/index.html')

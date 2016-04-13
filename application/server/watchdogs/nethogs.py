@@ -9,6 +9,15 @@ import time
 
 class NethogsWatchdog :
     def __init__(self,debug=False,devices=[],delay=1):
+
+        from sys import platform as _platform
+        if _platform == "linux" or _platform == "linux2":
+            pass
+            # linux
+        elif _platform == "darwin":
+            if len(devices)==0:
+                devices=['en0']
+        #elif _platform == "win32":
         self.devices=devices
         self.delay=str(delay)
         self.debug=debug
