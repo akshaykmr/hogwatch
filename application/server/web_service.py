@@ -31,7 +31,7 @@ print path_for_static_assets
 
 from watchdogs.nethogs import NethogsWatchdog
 
-def web_service(
+def app_server(
         host='0.0.0.0',
         port=8010,
         debugMode=True,
@@ -112,5 +112,5 @@ def web_service(
 
 
 if __name__ == '__main__':
-    web_service(ws=True)
+    app_server(ws=True)
     #todo kill threads on kill signal

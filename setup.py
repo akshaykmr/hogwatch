@@ -5,7 +5,7 @@ setup(
     name="hogwatch",
 
     # Version number (initial):
-    version="0.1.0",
+    version="0.1.3.5",
 
     # Application author details:
     author="Akshay Kumar",
@@ -13,6 +13,7 @@ setup(
 
     # Packages
     packages=["application"],
+    scripts=["hogwatch"],
 
     # Include additional files into the package
     include_package_data=True,
@@ -22,9 +23,9 @@ setup(
 
     #
     license="LICENSE.txt",
-    description="bandwidth monitoring tool",
+    description="find out whats hogging your internet",
 
-    long_description=open("README.txt").read(),
+    long_description="A bandwidth monitor that shows per process network transfer",
 
     # Dependent packages (distributions)
     install_requires=[

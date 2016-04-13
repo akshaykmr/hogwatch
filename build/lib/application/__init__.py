@@ -3,8 +3,8 @@ from threading import Thread
 from pprint import pprint
 import sys
 
-from application.server.web_service import web_service
-#from application.watchdogs.nethogs import NethogsWatchdog
+from server.web_service import web_service
+#from watchdogs.nethogs import NethogsWatchdog
 
 
 
@@ -19,6 +19,6 @@ if __name__=='__main__':
 
         server.daemon=True
         server.start()
-        from application.view.window import window
+        from view.window import window
 
         window('hogwatch','http://127.0.0.1:8010/index.html')
