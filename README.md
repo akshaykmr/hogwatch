@@ -1,4 +1,4 @@
-#####A bandwidth monitor that shows per process network transfer
+#####A bandwidth monitor that shows per process network transfer(alpha)
  
 ######*Screenshots*
 <img src="http://i.imgur.com/COOQXlq.png" height="600px">
