@@ -1,9 +1,8 @@
-####A bandwidth monitor that shows per process network transfer
+#####A bandwidth monitor that shows per process network transfer
  
-####Screenshots
-
-
-
+######*Screenshots*
+<img src="http://i.imgur.com/COOQXlq.png" height="600px">
+<img src="http://i.imgur.com/HSBJRsT.png" height="600px">
 #####requirements:
   - [nethogs (0.8.2 +)](https://github.com/raboof/nethogs) make sure its available in your path
   - python 2.7
