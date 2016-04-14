@@ -1,0 +1,5 @@
+bottle
+gevent
+gevent-websocket
+netifaces
+pywebview
