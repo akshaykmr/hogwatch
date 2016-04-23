@@ -32,7 +32,8 @@
                    <li 
                        v-for="log in latestLogs | orderBy 'kbps_in' -1"
                        track-by="uid"
-                       v-on:click="toggleActiveLog(log)">
+                       v-on:click="toggleActiveLog(log)"
+                       transition="log">
                        <div class="log" v-bind:class="{ 'active': log.isActive }">
                            {{log.process}}  
                        </div>                       
@@ -114,6 +115,7 @@
   <script src="js/jquery.min.js"></script>
   <script src="/js/moment.js"></script>
   <script src="js/vue.js"></script>
+  <script src="js/list_transition.js"></script>
   <script src="js/highstock.js"></script>
   <script src="js/nanoScroller.js"></script>
   <script src="js/main.js"></script>
