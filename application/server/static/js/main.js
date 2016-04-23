@@ -1,4 +1,4 @@
-console.log('js serving');
+//console.log('js serving');
 
 $(function () {
 
@@ -70,8 +70,12 @@ $(function () {
 
 });
 
+var chartInstance;
 function chart(){
-    return $('#charts').highcharts();
+    if(!chartInstance){
+        chartInstance=$('#charts').highcharts();
+    }
+    return chartInstance;
 }
 
 function fixPrecision(num,precision){
@@ -96,7 +100,7 @@ function seriesBlueprint(mode){
         visible: false,
         type: 'areaspline',
         tooltip: {
-            valueSuffix: 'kbps'
+            valueSuffix: 'kBps'
         },
         data : []
     }
@@ -120,7 +124,13 @@ if ("WebSocket" in window){
     var counter=0;
     var seen={};
     var latestLogs=[];
-    
+    var transferHistory=[];
+    /*
+            {
+                download: [[timestamp,value],...],
+                upload: [[timestamp,value],...]
+            }
+    */
     var transfer={
         seen: seen,
         latestLogs: latestLogs,
@@ -141,7 +151,7 @@ if ("WebSocket" in window){
             color: '#2980b9',
             type: 'areaspline',
             tooltip: {
-                valueSuffix: 'kbps'
+                valueSuffix: 'kBps'
             },
             data : []
         });        
@@ -151,7 +161,29 @@ if ("WebSocket" in window){
             color: '#e74c3c',
             type: 'areaspline',
             tooltip: {
-                valueSuffix: 'kbps'
+                valueSuffix: 'kBps'
+            },
+            data : []
+        });
+        
+        chart().addSeries({  //for active uid
+            name : 'download',
+            visible: false,
+            color: '#2980b9',
+            type: 'areaspline',
+            tooltip: {
+                valueSuffix: 'kBps'
+            },
+            data : []
+        });        
+
+        chart().addSeries({ //for active uid
+            name : 'upload',
+            visible: false,
+            color: '#e74c3c',
+            type: 'areaspline',
+            tooltip: {
+                valueSuffix: 'kBps'
             },
             data : []
         });
@@ -161,8 +193,8 @@ if ("WebSocket" in window){
     rate.onmessage=function(evt){
         
         var report = JSON.parse(evt.data);
-        report.total_in=fixPrecision(report.total_in);
-        report.total_out=fixPrecision(report.total_out);
+        report.total_in=fixPrecision(report.total_in,2);
+        report.total_out=fixPrecision(report.total_out,2);
         //console.log(report);
         
         function addLogToSeries(entry,uid,timestamp){
@@ -181,6 +213,27 @@ if ("WebSocket" in window){
             }
         }
         
+        function addToHistory(entry,uid,timestamp){
+            var series= transferHistory[uid]
+            series.download.push([timestamp,entry['kbps_in']])
+            series.upload.push([timestamp,-1*entry['kbps_out']])
+
+            if(transfer.activeLog===uid){
+                
+                chart().series[2].addPoint([timestamp,entry['kbps_in']],false,false)
+                chart().series[3].addPoint([timestamp,-1*entry['kbps_out']],false,false)
+                
+                var from=latestLogs[uid].initMoment;
+
+                if(transfer.window!==0){
+                    from= moment().subtract(transfer.window,'minutes').toDate().valueOf();  
+                }
+                if(!transfer.paused)
+                    chart().xAxis[0].setExtremes(from,report.timestamp);                
+            }
+        }
+
+        
      
           
         chart().series[0].addPoint([report.timestamp,report['total_in']],false,false);        
@@ -197,19 +250,26 @@ if ("WebSocket" in window){
                 entry.initMoment= (new Date()).valueOf();
                 latestLogs.push(entry);
                 
-                chart().addSeries(seriesBlueprint('download'));
-                chart().addSeries(seriesBlueprint('upload'));
-                addLogToSeries(entry,entry.uid,report.timestamp)
+                //chart().addSeries(seriesBlueprint('download'));
+                //chart().addSeries(seriesBlueprint('upload'));
+                //addLogToSeries(entry,entry.uid,report.timestamp)
+                transferHistory.push({
+                    download: [],
+                    upload: []
+                });
+                addToHistory(entry,entry.uid,report.timestamp);
+                
                 setTimeout(function(){
                     $(".nano").nanoScroller();
-                },100)
+                },200)
                 
             }else{
                 var uid=seen[entry.process];
                 var log=latestLogs[uid];
                 log['kbps_in']=entry['kbps_in'];
                 log['kbps_out']=entry['kbps_out'];
-                addLogToSeries(log,uid,report.timestamp);
+                //addLogToSeries(log,uid,report.timestamp);
+                addToHistory(log,uid,report.timestamp);
             }
         });
         
@@ -274,8 +334,8 @@ if ("WebSocket" in window){
 
 var format= function(kbps){
     if(kbps/1000>=1.0)
-        return (kbps/1000).toFixed(2) +' mb/s';
-    else return kbps.toString() + ' kb/s'
+        return (kbps/1000).toFixed(2) +' mB/s';
+    else return kbps.toString() + ' kB/s'
 }
 
 
@@ -317,10 +377,13 @@ var app= new Vue({
                 }  
             }
             
+            
             if(this.activeLog===log.uid){                
-                setVisibility(this.activeLog,false)
+                //setVisibility(this.activeLog,false)
                 log.isActive=false;
                 
+                chart().series[2].hide();
+                chart().series[3].hide();
                 chart().series[0].show();
                 chart().series[1].show();
                 this.activeLog=-1;
@@ -331,13 +394,15 @@ var app= new Vue({
                     chart().series[1].hide();
                 }else{
                     this.latestLogs[this.activeLog].isActive=false;
-                    setVisibility(this.activeLog,false)                    
+                    //setVisibility(this.activeLog,false)                    
                 }               
-                
-                setVisibility(log.uid,true);
+                //setVisibility(log.uid,true);
                 log.isActive=true;
+                chart().series[2].setData(transferHistory[log.uid].download);
+                chart().series[3].setData(transferHistory[log.uid].upload);
+                chart().series[2].show();
+                chart().series[3].show();
                 this.activeLog=log.uid;
-                
             }
         },
         toggleWindowState: function(){
@@ -361,4 +426,12 @@ var app= new Vue({
     }
 });
 
-$(".nano").nanoScroller({ alwaysVisible: true });
+
+$(".nano").nanoScroller({ alwaysVisible: true });  
+
+
+
+
+/************/
+
+
