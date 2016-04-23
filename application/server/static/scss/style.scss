@@ -146,6 +146,22 @@ body {
     };
     margin-top: 1px;
     margin-bottom: 6px;
+
+    &-transition {
+          transition: opacity .5s ease;
+        }
+    &-enter {
+      opacity: 0;
+    }
+    &-leave {
+      opacity: 0;
+      position: absolute; /* important for removal move to work */
+    }
+    &-move {
+      color: red;
+      transition: transform .5s cubic-bezier(.55,0,.1,1); /* applied when moving */
+    }
+    
 }
 
 
