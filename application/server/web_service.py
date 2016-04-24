@@ -16,15 +16,16 @@ from bottle import (
     request,
     abort
 )
-
-local_path=os.path.dirname(os.path.abspath('web_service.py'))
-from sys import platform as _platform
-if _platform == "linux" or _platform == "linux2":
-    path_for_static_assets=os.path.join(local_path,'application','server','static')
-elif _platform == "darwin":
-    path_for_static_assets=os.path.join(local_path,'application','server','static')
-elif _platform == "win32":
-    pass
+local_path=os.path.abspath(os.path.dirname(__file__))
+path_for_static_assets= os.path.join(local_path,'static')
+# local_path=os.path.dirname(os.path.abspath('web_service.py'))
+# from sys import platform as _platform
+# if _platform == "linux" or _platform == "linux2":
+#     path_for_static_assets=os.path.join(local_path,'application','server','static')
+# elif _platform == "darwin":
+#     path_for_static_assets=os.path.join(local_path,'application','server','static')
+# elif _platform == "win32":
+#     pass
 
 path_for_static_assets += '/'
 print path_for_static_assets
@@ -33,7 +34,7 @@ from watchdogs.nethogs import NethogsWatchdog
 
 def app_server(
         host='0.0.0.0',
-        port=8010,
+        port=6432,
         debugMode=True,
         reloader=True,
         ws=True
