@@ -6,7 +6,7 @@ setup(
     name="hogwatch",
 
     # Version number (initial):
-    version="0.1.4.0",
+    version="0.1.4.2",
 
     # Application author details:
     author="Akshay Kumar",
