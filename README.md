@@ -26,7 +26,7 @@ As hogwatch runs a light web server. you can view using either
   - `pip install -r requirements.txt`
   - `sudo python setup.py install`
   - run with `sudo ./hogwatch`
-  - optional `sudo ./hogwatch server` for only server accessible at *localhost:8010*
+  - optional `sudo ./hogwatch server` for only server accessible at *localhost:6432*
 
 
 ####Contributing/Current bugs
