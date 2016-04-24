@@ -1,4 +1,5 @@
 # hogwatch menubar app
+see [menubar](https://github.com/maxogden/menubar) Works on Mac OS and some Linuxes (Tested on Xfce4, your mileage may vary -- patches welcome!)
 
 ## instructions
 
