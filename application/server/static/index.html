@@ -127,14 +127,16 @@
     </div>
 
  
-
+  <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
   <script src="js/jquery.min.js"></script>
-  <script src="js/jquery.leanModal.min.js"></script>
+  <script>if (window.module) module = window.module;</script>
+  
   <script src="/js/moment.js"></script>
   <script src="js/vue.js"></script>
   <script src="js/list_transition.js"></script>
   <script src="js/highstock.js"></script>
   <script src="js/nanoScroller.js"></script>
+  <script src="js/jquery.leanModal.min.js"></script>
   <script src="js/main.js"></script>
 
 </body>
