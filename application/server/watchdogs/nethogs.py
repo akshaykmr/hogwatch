@@ -31,7 +31,7 @@ class NethogsWatchdog :
         if mode=='transfer_rate':   
             param='0'
         else:
-            param='3'
+            param='1'
 
         cmd=['nethogs','-d',self.delay, '-v',param,'-t']+self.devices
         if self.debug:
@@ -65,8 +65,8 @@ class NethogsWatchdog :
                     entry['kbps_in']=round(Decimal((float(split[2]))),1)
                 else: #mode is 'transfer_amount'
                     #MB out/in
-                    entry['mb_out']=round(Decimal((float(split[1]))),1)
-                    entry['mb_in']=round(Decimal((float(split[2]))),1)
+                    entry['kb_out']=round(Decimal((float(split[1]))),1)
+                    entry['kb_in']=round(Decimal((float(split[2]))),1)
 
                 entries.append(entry)
             else:
@@ -85,8 +85,8 @@ class NethogsWatchdog :
                         total_in+=entry['kbps_in']
                         total_out+=entry['kbps_out']
                     else:
-                        total_in+=entry['mb_in']
-                        total_out+=entry['mb_out']
+                        total_in+=entry['kb_in']
+                        total_out+=entry['kb_out']
 
                 report['total_in']=total_in
                 report['total_out']=total_out

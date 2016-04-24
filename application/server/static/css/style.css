@@ -35,7 +35,7 @@
 
 /* line 51, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
 body {
-  background-color: white;
+  background-color: whitesmoke;
   height: 100vh;
   width: 100%;
   overflow: hidden; }
@@ -70,12 +70,16 @@ body {
   margin-bottom: 0;
   height: calc(70% - 65px);
   min-width: 320px; }
+  /* line 84, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  #charts div {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important; }
 
-/* line 85, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+/* line 90, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
 .container {
   height: 100vh; }
 
-/* line 89, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+/* line 94, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
 .top-header {
   position: relative;
   height: 30px;
@@ -85,24 +89,25 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
   color: #2c3e50; }
-  /* line 100, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 105, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .top-header div {
     top: 5px;
     position: absolute;
     display: inline;
     height: 30px; }
-  /* line 107, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 112, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .top-header .heading {
     left: 5px;
-    font-size: 1.4em;
+    font-size: 1.2em;
     width: 40%; }
 
-/* line 114, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+/* line 119, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
 #highcharts-0 > svg > text {
   visibility: hidden; }
 
-/* line 118, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+/* line 123, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
 .log {
+  font-size: 0.7em;
   cursor: pointer;
   background-color: slategray;
   color: white;
@@ -117,7 +122,7 @@ body {
   transition: all 0.2s ease-out;
   margin-top: 1px;
   margin-bottom: 6px; }
-  /* line 132, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 138, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .log.active {
     background-color: white;
     color: #2c3e50;
@@ -127,24 +132,24 @@ body {
         outline: none;*/
     border: 1px solid #ababab;
     box-shadow: -1px 1px #ababab, -2px 2px #ababab, -3px 3px #ababab, -4px 4px #ababab, -5px 5px #ababab; }
-  /* line 150, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 156, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .log-transition {
     transition: opacity 0.5s ease; }
-  /* line 153, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 159, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .log-enter {
     opacity: 0; }
-  /* line 156, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 162, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .log-leave {
     opacity: 0;
     position: absolute;
     /* important for removal move to work */ }
-  /* line 160, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 166, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .log-move {
     color: red;
     transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
     /* applied when moving */ }
 
-/* line 168, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+/* line 174, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
 .info-bar {
   position: absolute;
   bottom: 0px;
@@ -153,60 +158,67 @@ body {
   width: 96%;
   height: 40px;
   color: #2c3e50; }
-  /* line 178, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 184, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .info-bar div {
     position: absolute;
     height: 100%;
     display: inline; }
-  /* line 184, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 190, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .info-bar .transfer-total {
     width: 50%; }
-    /* line 186, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+    /* line 192, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
     .info-bar .transfer-total svg {
       width: 28px;
       position: absolute;
       top: 5px;
       left: 5px; }
-    /* line 193, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+    /* line 199, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
     .info-bar .transfer-total .rate {
       font-size: 1.1em;
       margin-left: 40px;
-      margin-top: 4px;
+      margin-top: 6px;
       width: 70%; }
-    /* line 200, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+    /* line 206, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
     .info-bar .transfer-total .amount {
-      visibility: hidden;
+      color: grey;
+      text-align: right;
       position: absolute;
       height: 32px;
       top: -5px;
-      right: 40px;
+      margin-top: 12px;
+      right: 5px;
       width: calc(50% - 40px);
-      background-color: #2c3e50;
       border-radius: 5px; }
-  /* line 211, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 219, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .info-bar .up {
     top: 0;
-    right: 0; }
-  /* line 215, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+    right: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: cornsilk; }
+  /* line 226, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .info-bar .down {
     top: 0;
-    right: 50%; }
+    right: 50%;
+    background-color: honeydew;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px; }
 
-/* line 221, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+/* line 235, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
 .app {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100vh; }
 
-/* line 228, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+/* line 242, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
 .window-range-selector {
   position: absolute;
   top: 0;
   right: 3%;
   width: 180px;
   height: 40px; }
-  /* line 235, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 249, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .window-range-selector div {
     cursor: pointer;
     display: inline;
@@ -222,35 +234,35 @@ body {
     text-align: center;
     background-color: #6496c8;
     box-shadow: 0 5px #27496d; }
-    /* line 251, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+    /* line 265, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
     .window-range-selector div.active {
       background-color: #417cb8;
       box-shadow: 0 5px #27496d;
       transform: translateY(5px); }
-  /* line 258, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 272, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .window-range-selector div:hover {
     background-color: #417cb8; }
-  /* line 262, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 276, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .window-range-selector .state {
     left: 0; }
-    /* line 266, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+    /* line 280, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
     .window-range-selector .state svg {
       position: absolute;
       width: 90%;
       top: calc(5% + 5px);
       left: 5%; }
-  /* line 274, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 288, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .window-range-selector .divider {
     left: 40px;
     width: 20px;
     display: none; }
-  /* line 280, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 294, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .window-range-selector #range-0 {
     left: 60px; }
-  /* line 284, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 298, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .window-range-selector #range-5 {
     left: 100px; }
-  /* line 288, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
+  /* line 302, /Users/akshay/Documents/Programming/python/bandwidth_monitor/application/server/static/scss/style.scss */
   .window-range-selector #range-30 {
     left: 140px; }
 

@@ -138,8 +138,8 @@ if ("WebSocket" in window){
         window: 0, //0 means all, else form window from minutes back to report_timestamp,
         total_kbps_in: 0,
         total_kbps_out: 0,
-        total_mb_in: 0,
-        total_mb_out:0
+        total_kb_in: 0,
+        total_kb_out:0
     }
     
     rate.onopen=function(){
@@ -306,20 +306,20 @@ if ("WebSocket" in window){
         report.total_out=fixPrecision(report.total_out);
         
         report.entries.forEach(function(entry){
-            entry.mb_in=fixPrecision(entry.mb_in);
-            entry.mb_out=fixPrecision(entry.mb_out);
+            entry.kb_in=fixPrecision(entry.kb_in);
+            entry.kb_out=fixPrecision(entry.kb_out);
             if(seen[entry.process]!==undefined){
                 var log=latestLogs[seen[entry.process]];
-                log['mb_in']=entry['mb_in'];
-                log['mb_out']=entry['mb_out'];
+                log['kb_in']=entry['kb_in'];
+                log['kb_out']=entry['kb_out'];
             }else{
                 //console.log('transfer amount could not be matched',entry)
                 //fix this | separate the amount and rate to different views?
             }
         })
         
-        transfer.total_mb_in=report.total_in;
-        transfer.total_mb_out=report.total_out;
+        transfer.total_kb_in=report.total_in;
+        transfer.total_kb_out=report.total_out;
         
         amount.send('next');
     }
@@ -336,6 +336,12 @@ var format= function(kbps){
     if(kbps/1000>=1.0)
         return (kbps/1000).toFixed(2) +' mB/s';
     else return kbps.toString() + ' kB/s'
+}
+
+var formatAmount= function(kb){
+    if(kb/1000>=1.0)
+        return (kb/1000).toFixed(2) +' mB';
+    else return kb.toString() + ' kB'
 }
 
 
@@ -361,9 +367,22 @@ var app= new Vue({
             rate=this.latestLogs[this.activeLog].kbps_out;  
         }
         return format(rate); 
-      }
+      },
+        transferIn: function(){
+            if(this.activeLog===-1)
+                return formatAmount(this.total_kb_in);
+            else{
+                return formatAmount(this.latestLogs[this.activeLog].kb_in);
+            }
+        },
+        transferOut:function(){
+            if(this.activeLog===-1)
+                return formatAmount(this.total_kb_out);
+            else{
+                return formatAmount(this.latestLogs[this.activeLog].kb_out);
+            }
+        }
     },
-    
     methods: {
         toggleActiveLog: function(log){
             
