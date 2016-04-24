@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: hogwatch
+Version: 0.1.4.0
+Summary: find out whats hogging your internet
+Home-page: https://github.com/akshayKMR/hogwatch
+Author: Akshay Kumar
+Author-email: akshay.kmr4321@gmail.com
+License: LICENSE.txt
+Description: A bandwidth monitor that shows per process network transfer
+Platform: UNKNOWN

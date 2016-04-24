@@ -1,18 +1,19 @@
 from distutils.core import setup
+from setuptools import find_packages
 
 setup(
     # Application name:
     name="hogwatch",
 
     # Version number (initial):
-    version="0.1.3.6",
+    version="0.1.4.0",
 
     # Application author details:
     author="Akshay Kumar",
     author_email="akshay.kmr4321@gmail.com",
 
     # Packages
-    packages=["application"],
+    packages=find_packages(),
     scripts=["hogwatch"],
 
     # Include additional files into the package
