@@ -1,0 +1,18 @@
+{
+  "name": "hogwatch-menubar",
+  "version": "0.0.2",
+  "description": "hogwatch menubar app",
+  "dependencies": {
+    "menubar": "*"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.1.0",
+    "electron-prebuilt": "^0.36.0",
+    "jquery": "*"
+  },
+  "main": "main.js",
+  "scripts": {
+    "build": "electron-packager . hogwatch-menubar --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
+    "start": "electron ."
+  }
+}
