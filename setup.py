@@ -6,7 +6,7 @@ setup(
     name="hogwatch",
 
     # Version number (initial):
-    version="0.1.4.2",
+    version="0.0.1",
 
     # Application author details:
     author="Akshay Kumar",
@@ -21,9 +21,11 @@ setup(
 
     # Details
     url="https://github.com/akshayKMR/hogwatch",
+    setup_requires=['setuptools-markdown'],
+    long_description_markdown_filename='README.md',
 
     #
-    license="LICENSE.txt",
+    license="GNU GPL V3",
     description="find out whats hogging your internet",
 
     long_description="A bandwidth monitor that shows per process network transfer",
