@@ -9,11 +9,11 @@
   - python 2.7
 
 #####Install
- -  `sudo pip install hogwatch`
+ -  `pip install hogwatch`
 
 #####Running
 As hogwatch runs a light web server. you can view using either
- 1. Open window: `sudo hogwatch`   sudo is needed for nethogs
+ 1. Open window: `sudo hogwatch`   sudo is needed for nethogs. Its a bad idea to run the whole process as root. need to fix this.
  2. Web browser: `sudo hogwatch server`  view at `localhost:6432` default port. for custom port specify port eg`sudo hogwatch server 8010`. You can see this output from other devices on the network by specifying `ip` in place of localhost.
  
  3. Menubar: currently just for testing. got to menubar folder for instructions 
