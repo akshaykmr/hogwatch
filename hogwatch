@@ -8,7 +8,7 @@ from application.server.web_service import app_server
 #from watchdogs.nethogs import NethogsWatchdog
 
 if(len(sys.argv)>=2 and sys.argv[1]=='server'):
-    if(sys.argv[2]):
+    if(len(sys.argv)==3):
         app_server(port=int(sys.argv[2]))
     else:
         app_server()
