@@ -22,6 +22,11 @@ class NethogsWatchdog :
         self.delay=str(delay)
         self.debug=debug
 
+        self._running=True
+
+    def terminate(self):
+        self._running=False
+
     def watch_transfer(self,mode='transfer_rate',bridge={}):
         #param 0=rate, 3 amount in MB
 
@@ -45,6 +50,10 @@ class NethogsWatchdog :
 
         entries=[]      
         for line in iter(p.stdout.readline, b''):
+
+            if(self._running==False):
+                break
+
             #print line
             if(line.find('Refreshing')==-1):
 
@@ -105,8 +114,11 @@ class NethogsWatchdog :
         if self.debug:
             p.wait()
         else:
-            bridge['event'].wait()
+            if(self._running==False):
+                p.kill()
+            #bridge['event'].wait()
 
+        
 
 if __name__=='__main__':
 

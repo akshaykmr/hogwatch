@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: hogwatch
-Version: 0.0.1
+Version: 0.1.1
 Summary: find out whats hogging your internet
 Home-page: https://github.com/akshayKMR/hogwatch
 Author: Akshay Kumar
@@ -17,11 +17,11 @@ Description: #####A bandwidth monitor that shows per process network transfer(al
           - python 2.7
         
         #####Install
-         -  `sudo pip install hogwatch`
+         -  `pip install hogwatch`
         
         #####Running
         As hogwatch runs a light web server. you can view using either
-         1. Open window: `sudo hogwatch`   sudo is needed for nethogs
+         1. Open window: `sudo hogwatch`   sudo is needed for nethogs. Its a bad idea to run the whole process as root. need to fix this.
          2. Web browser: `sudo hogwatch server`  view at `localhost:6432` default port. for custom port specify port eg`sudo hogwatch server 8010`. You can see this output from other devices on the network by specifying `ip` in place of localhost.
          
          3. Menubar: currently just for testing. got to menubar folder for instructions 
@@ -36,7 +36,7 @@ Description: #####A bandwidth monitor that shows per process network transfer(al
           - `pip install -r requirements.txt`
           - `sudo python setup.py install`
           - run with `sudo ./hogwatch`
-          - optional `sudo ./hogwatch server` for only server accessible at *localhost:8010*
+          - optional `sudo ./hogwatch server` for only server accessible at *localhost:6432*
         
         
         ####Contributing

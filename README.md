@@ -36,5 +36,5 @@ Hogwatch uses a light python webserver(bottle) feeding [nethogs](https://github.
 
 ####License
 Copyright Akshay Kumar akshay.kmr4321@gmail.com <br>
-GNU General Public License v3 (GPL-3)
+MIT
   

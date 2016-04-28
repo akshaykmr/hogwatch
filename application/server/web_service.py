@@ -75,21 +75,30 @@ def app_server(
                 args=(mode,bridge)
             )
             t.daemon=True
-            t.start()
-
-            wsock = request.environ.get('wsgi.websocket')
-            if not wsock:
-                abort(400, 'Expected WebSocket request.')
             
-            while True:
-                try:
-                    message = wsock.receive()
-                    report=bridge['queue'].get()
-                    wsock.send(json.dumps(report))
-                    gevent.sleep(0.1)
-                except WebSocketError:
+            try:
+                t.start()
+
+                wsock = request.environ.get('wsgi.websocket')
+                if not wsock:
+                    tommy.terminate()
                     bridge['event'].set()
-                    break
+                    abort(400, 'Expected WebSocket request.')
+                
+                while True:
+                    try:
+                        message = wsock.receive()
+                        report=bridge['queue'].get()
+                        wsock.send(json.dumps(report))
+                        gevent.sleep(0.1)
+                    except WebSocketError:
+                        tommy.terminate()
+                        bridge['event'].set()
+                        break
+
+            except (KeyboardInterrupt, SystemExit):
+                  t.terminate();
+                  sys.exit()
 
 
     @app.route('/<filename:path>')
