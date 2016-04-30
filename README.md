@@ -1,7 +1,7 @@
 #####A bandwidth monitor that shows per process network transfer(Alpha)
 
 I built this project for my college assignment. It's my first python project/package for that matter.
-I am really overwhelmed by the response. However the project is still very much unifinished.
+I am really overwhelmed by the response. However the project is still very much unfinished.
 
 Here are somethings that need to be fixed/added for eg.
 
@@ -10,7 +10,7 @@ Here are somethings that need to be fixed/added for eg.
  - store history for restarts
  - proper packaging
  - unit tests
- 
+
 ######*Screenshots*
 <img src="http://i.imgur.com/LGQagKL.png" height="600px">
 <img src="http://i.imgur.com/R9n8rMK.gif">
@@ -26,8 +26,8 @@ Here are somethings that need to be fixed/added for eg.
 As hogwatch runs a light web server. you can view using either
  1. Open window: `sudo hogwatch`   sudo is needed for nethogs. Its a bad idea to run the whole process as root. need to fix this.
  2. Web browser: `sudo hogwatch server`  view at `localhost:6432` default port. for custom port specify port eg`sudo hogwatch server 8010`. You can see this output from other devices on the network by specifying `ip` in place of localhost.
- 
- 3. Menubar: currently just for testing. got to menubar folder for instructions 
+
+ 3. Menubar: currently just for testing. go to the menubar folder for instructions 
  <img src="http://i.imgur.com/jZoTllz.jpg" alt="screenshot" height="400px">
 <br>
  <hr>
@@ -48,4 +48,4 @@ Hogwatch uses a light python webserver(bottle) feeding [nethogs](https://github.
 ####License
 Copyright Akshay Kumar akshay.kmr4321@gmail.com <br>
 MIT
-  
+
