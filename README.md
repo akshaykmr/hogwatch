@@ -1,4 +1,15 @@
-#####A bandwidth monitor that shows per process network transfer(alpha)
+#####A bandwidth monitor that shows per process network transfer(Alpha)
+
+I built this project for my college assignment. It's my first python project/package for that matter.
+I am really overwhelmed by the response. However the project is still very much unifinished.
+
+Here are somethings that need to be fixed/added for eg.
+
+ - fix some bugs on frontend.(proper sort on listing/chart switching etc.)
+ - kill nethogs process on exit // fails sometimes
+ - store history for restarts
+ - proper packaging
+ - unit tests
  
 ######*Screenshots*
 <img src="http://i.imgur.com/LGQagKL.png" height="600px">
