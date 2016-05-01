@@ -1,2 +1,2 @@
 recursive-include application *
-Readme.md
+include README.md

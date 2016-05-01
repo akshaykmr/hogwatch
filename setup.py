@@ -1,12 +1,17 @@
 from distutils.core import setup
 from setuptools import find_packages
 
+import os
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 setup(
     # Application name:
     name="hogwatch",
 
     # Version number (initial):
-    version="0.1.1",
+    version="0.1.5",
 
     # Application author details:
     author="Akshay Kumar",
@@ -21,8 +26,8 @@ setup(
 
     # Details
     url="https://github.com/akshayKMR/hogwatch",
-    setup_requires=['setuptools-markdown'],
-    long_description_markdown_filename='README.md',
+    #setup_requires=['setuptools-markdown'],
+    #long_description_markdown_filename=read('README.md'),
 
     #
     license="MIT" ,
