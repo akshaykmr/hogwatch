@@ -19,12 +19,27 @@ Here are somethings that need to be fixed/added for eg.
   - [nethogs (0.8.2 +)](https://github.com/raboof/nethogs) make sure its available in your path.
   - python 2.7
 
-#####Install
+####Install
  -  `pip install hogwatch`
 
-#####Running
+
+**update:** The package requires a pip module called pywebview for opening a webview window directly. Its easy to use but it sometimes doesn't display output as it would on a web browser such as chrome, moreover installing it requires some additional packages on some systems as reported by users. 
+pywebview also downloads a lot of dependencies when installing on osx considering which I suggest installing the following way.
+```
+git clone https://github.com/akshayKMR/hogwatch.git
+cd hogwatch
+now remove pywebview from requirements.txt and comment it from setup.py
+pip install -r requirements.txt
+sudo python setup.py install
+sudo ./hogwatch server
+and access it on chrome localhost:6432
+```
+If someone still needs the webview maybe some one can make an electron app. It would just need to hit http://localhost:6432
+The menubar client does the same.(look in menubar folder)
+
+####Running
 As hogwatch runs a light web server. you can view using either
- 1. Open window: `sudo hogwatch`   sudo is needed for nethogs. Its a bad idea to run the whole process as root. need to fix this.
+ 1. Open window: `sudo hogwatch`   sudo is needed for nethogs. Its a bad idea to run the whole process as root. need to fix this. **update:** this mode is not recommended. see above update.
  2. Web browser: `sudo hogwatch server`  view at `localhost:6432` default port. for custom port specify port eg`sudo hogwatch server 8010`. You can see this output from other devices on the network by specifying `ip` in place of localhost.
 
  3. Menubar: currently just for testing. go to the menubar folder for instructions 
@@ -33,13 +48,15 @@ As hogwatch runs a light web server. you can view using either
  <hr>
  <br>
 
-#####installation/run: (Development)
+####installation/run: (Development)
   - `git clone https://github.com/akshayKMR/hogwatch.git`
   - `cd hogwatch`
   - `pip install -r requirements.txt`
   - `sudo python setup.py install`
   - run with `sudo ./hogwatch`
   - optional `sudo ./hogwatch server` for only server accessible at *localhost:6432*
+  
+All are welcome to fork and contribute. I have my finals this month after which I'll be more active.
 
 
 ####Contributing
