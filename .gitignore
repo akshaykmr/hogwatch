@@ -1,3 +1,5 @@
 
 todo.md
 *.pyc
+./dist
+*.DS_Store

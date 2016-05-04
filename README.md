@@ -4,9 +4,12 @@ I built this project for my college assignment. It's my first python project/pac
 I am really overwhelmed by the response. However the project is still very much unfinished.
 
 Here are somethings that need to be fixed/added for eg.
-
- - fix some bugs on frontend.(proper sort on listing/chart switching etc.)
- - kill nethogs process on exit // fails sometimes
+ - fix some bugs on frontend
+     + sort on transfer_amount instead
+     + fix error #15 on switching charts
+ - kill nethogs process on exit // fails sometimes 
+ - filter by device such as wlan,eth0 (frontend ui)
+ - show more details such as pid,user with improved ui (possible for linux)
  - store history for restarts
  - proper packaging
  - unit tests
@@ -15,7 +18,7 @@ Here are somethings that need to be fixed/added for eg.
 <img src="http://i.imgur.com/LGQagKL.png" height="600px">
 <img src="http://i.imgur.com/R9n8rMK.gif">
 
-#####requirements:
+####Requirements:
   - [nethogs (0.8.2 +)](https://github.com/raboof/nethogs) make sure its available in your path.
   - python 2.7
 
@@ -56,7 +59,8 @@ As hogwatch runs a light web server. you can view using either
   - run with `sudo ./hogwatch`
   - optional `sudo ./hogwatch server` for only server accessible at *localhost:6432*
   
-All are welcome to fork and contribute. I have my finals this month after which I'll be more active.
+All are welcome to fork and contribute. 
+I have my finals this month after which I'll be more active.
 
 
 ####Contributing
