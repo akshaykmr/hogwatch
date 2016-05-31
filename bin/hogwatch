@@ -7,7 +7,7 @@ from time import sleep
 
 import threading
 
-from application.server.web_service import app_server
+from hogwatch.server.web_service import app_server
 #from watchdogs.nethogs import NethogsWatchdog
 
 if(len(sys.argv)>=2 and sys.argv[1]=='server'):

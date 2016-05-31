@@ -19,7 +19,7 @@ setup(
 
     # Packages
     packages=find_packages(),
-    scripts=["hogwatch"],
+    scripts=["bin/hogwatch"],
 
     # Include additional files into the package
     include_package_data=True,
@@ -27,7 +27,7 @@ setup(
     # Details
     url="https://github.com/akshayKMR/hogwatch",
     #setup_requires=['setuptools-markdown'],
-    #long_description_markdown_filename=read('README.md'),
+    #long_description_markdown_filename='README.md',
 
     #
     license="MIT" ,

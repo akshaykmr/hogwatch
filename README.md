@@ -57,8 +57,8 @@ As hogwatch runs a light web server. you can view using either
   - optional: for only server mode. remove pywebview from requirements.txt and comment it from setup.py
   - `pip install -r requirements.txt --upgrade`
   - `python setup.py install`
-  - run with `sudo ./hogwatch` wait for [issue#7](https://github.com/akshayKMR/hogwatch/issues/7)
-  - optional `sudo ./hogwatch server` for only server accessible at *localhost:6432*
+  - run with `sudo ./bin/hogwatch` wait for [issue#7](https://github.com/akshayKMR/hogwatch/issues/7)
+  - optional `sudo ./bin/hogwatch server` for only server accessible at *localhost:6432*
   
 All are welcome to fork and contribute.
 
