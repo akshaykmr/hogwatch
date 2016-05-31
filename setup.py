@@ -27,7 +27,7 @@ setup(
     # Details
     url="https://github.com/akshayKMR/hogwatch",
     #setup_requires=['setuptools-markdown'],
-    #long_description_markdown_filename=read('README.md'),
+    #long_description_markdown_filename='README.md',
 
     #
     license="MIT" ,
