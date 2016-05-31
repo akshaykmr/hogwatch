@@ -3,22 +3,40 @@ from Queue import Queue
 from threading import Thread
 from pprint import pprint
 import sys
+from time import sleep
+
+import threading
 
 from application.server.web_service import app_server
 #from watchdogs.nethogs import NethogsWatchdog
 
 if(len(sys.argv)>=2 and sys.argv[1]=='server'):
+    print "Hit ctrl-c to exit"
     if(len(sys.argv)==3):
         app_server(port=int(sys.argv[2]))
     else:
-        app_server()
-else :
+        app_server()    
+else :    
+    import webview 
+
+    url='http://127.0.0.1:6432/index.html'
+    window_title='hogwatch'
+
     server=Thread(
         target=app_server
     )
-
-    server.daemon=True
+    server.setDaemon(True)
     server.start()
-    from application.view.window import window
+    
+    webview.create_window(
+        window_title,
+        url,
+        resizable=True,
+        width=400,
+        height=600,
+        min_size=(320, 300)
+    )
 
-    window('hogwatch','http://127.0.0.1:6432/index.html')
+    #BUG daemon thread not closed after main (all non-daemon) threads end
+
+    

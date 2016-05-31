@@ -2,7 +2,7 @@ import subprocess, sys
 from Queue import Queue
 from pprint import pprint
 from threading import Event
-from decimal import *
+from decimal import Decimal
 import time
 
 #todo learn logging
@@ -17,7 +17,8 @@ class NethogsWatchdog :
         elif _platform == "darwin":
             if len(devices)==0:
                 devices=['en0']
-        #elif _platform == "win32":
+        elif _platform == "win32":
+            print "Windows is not supported."
         self.devices=devices
         self.delay=str(delay)
         self.debug=debug
@@ -41,11 +42,13 @@ class NethogsWatchdog :
         cmd=['nethogs','-d',self.delay, '-v',param,'-t']+self.devices
         if self.debug:
             print cmd
+
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1)
 
         refresh_flag=True #naming is tough...
         report={}
         report['mode']=mode
+        report['running']=True
         report['ctr']=0 
 
         entries=[]      
@@ -69,11 +72,9 @@ class NethogsWatchdog :
 
 
                 if(mode=='transfer_rate'):
-                    #kbps out/in
                     entry['kbps_out']=round(Decimal((float(split[1]))),1)
                     entry['kbps_in']=round(Decimal((float(split[2]))),1)
                 else: #mode is 'transfer_amount'
-                    #MB out/in
                     entry['kb_out']=round(Decimal((float(split[1]))),1)
                     entry['kb_in']=round(Decimal((float(split[2]))),1)
 
@@ -100,23 +101,25 @@ class NethogsWatchdog :
                 report['total_in']=total_in
                 report['total_out']=total_out
                 report['entries']=entries
-                report['ctr']+=1 # I dont know why there is a race condition here -_-'
+                report['ctr']+=1
                 entries=[]
 
                 if self.debug:
                     pprint(report)
                 else:
-                    report['timestamp']=int(round(time.time() * 1000))
+                    report['timestamp']=int(round(time.time() * 1000)) #js time format
                     bridge['queue'].put(report)
 
         p.stdout.close()
-
+        p.terminate()
         if self.debug:
-            p.wait()
+            print 'exit'
         else:
-            if(self._running==False):
-                p.kill()
-            #bridge['event'].wait()
+            report={}
+            report['running']=False
+            bridge['queue'].put(report)  
+        
+        #bridge['event'].wait()
 
         
 
