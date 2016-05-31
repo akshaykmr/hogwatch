@@ -19,7 +19,7 @@ setup(
 
     # Packages
     packages=find_packages(),
-    scripts=["hogwatch"],
+    scripts=["bin/hogwatch"],
 
     # Include additional files into the package
     include_package_data=True,
