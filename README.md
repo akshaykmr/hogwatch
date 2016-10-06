@@ -6,7 +6,6 @@ Here are some things that need to be fixed/added for eg.
  - fix some bugs on frontend
      + sort on transfer_amount instead
      + fix error #15 on switching charts
- - kill nethogs process on exit ( [when using window mode the server thread daemon is not killed on main thread exit](https://github.com/akshayKMR/hogwatch/issues/7)) 
  - filter by device such as wlan,eth0 (frontend ui)
  - show more details such as pid,user with improved ui (possible for linux)
  - store history for restarts
@@ -29,7 +28,7 @@ Here are some things that need to be fixed/added for eg.
 
 ####Running
 As hogwatch runs a light web server. you can view using either
- 1. Standalone (webview): `sudo hogwatch`   sudo is needed for nethogs. Its a bad idea to run the whole process as root. need to fix this. **update:** this mode is not recommended for now. wait for [issue#7](https://github.com/akshayKMR/hogwatch/issues/7)
+ 1. Standalone (webview): `sudo hogwatch`   sudo is needed for nethogs. Its a bad idea to run the whole process as root. need to fix this.
  2. Web browser: `sudo hogwatch server`  view at `localhost:6432` default port. for custom port specify port eg`sudo hogwatch server 8010`. You can see this output from other devices on the network by specifying `ip` in place of localhost.
 
  3. Menubar: currently experimental. head to the menubar folder for instructions 
@@ -48,16 +47,18 @@ As hogwatch runs a light web server. you can view using either
      - 5m,30m etc. are graph range selectors and determine the range window for the graph. For eg. if 5m is selected then the graph is scaled to show the latest 5 minute stats (pause and scroll for navigating history). "[ ]" button makes the range over the entire duration of the program.
 
 <br>
- <hr>
- <br>
+<hr>
+<br>
 
 ####installation/run: (Development)
+  - set up a [virtualenv](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+  -  with python 2.7
   - `git clone https://github.com/akshayKMR/hogwatch.git`
   - `cd hogwatch`
   - optional: for only server mode. remove pywebview from requirements.txt and comment it from setup.py
   - `pip install -r requirements.txt --upgrade`
-  - `python setup.py install`
-  - run with `sudo ./bin/hogwatch` wait for [issue#7](https://github.com/akshayKMR/hogwatch/issues/7)
+  - `python setup.py develop`
+  - run with `sudo ./bin/hogwatch`
   - optional `sudo ./bin/hogwatch server` for only server accessible at *localhost:6432*
   
 All are welcome to fork and contribute.

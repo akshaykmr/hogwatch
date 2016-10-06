@@ -1,11 +1,10 @@
 import subprocess, sys
 from Queue import Queue
 from pprint import pprint
-from threading import Event
 from decimal import Decimal
 import time
 
-#todo learn logging
+import atexit
 
 class NethogsWatchdog :
     def __init__(self,debug=False,devices=[],delay=1):
@@ -16,7 +15,8 @@ class NethogsWatchdog :
             # linux
         elif _platform == "darwin":
             if len(devices)==0:
-                devices=['en0']
+                #devices=['en0']
+                pass
         elif _platform == "win32":
             print "Windows is not supported."
         self.devices=devices
@@ -44,8 +44,10 @@ class NethogsWatchdog :
             print cmd
 
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, bufsize=1)
+        atexit.register(p.terminate)
 
-        refresh_flag=True #naming is tough...
+        # need json output :/
+        refresh_flag=True
         report={}
         report['mode']=mode
         report['running']=True
@@ -72,11 +74,11 @@ class NethogsWatchdog :
 
 
                 if(mode=='transfer_rate'):
-                    entry['kbps_out']=round(Decimal((float(split[1]))),1)
-                    entry['kbps_in']=round(Decimal((float(split[2]))),1)
+                    entry['kbps_out']=float(split[1])
+                    entry['kbps_in']=float(split[2])
                 else: #mode is 'transfer_amount'
-                    entry['kb_out']=round(Decimal((float(split[1]))),1)
-                    entry['kb_in']=round(Decimal((float(split[2]))),1)
+                    entry['kb_out']=float(split[1])
+                    entry['kb_in']=float(split[2])
 
                 entries.append(entry)
             else:
@@ -87,8 +89,6 @@ class NethogsWatchdog :
                 if(len(entries)==0):
                     continue
                 
-                # print '\n'
-                # pprint(entries)
                 total_in,total_out= 0,0
                 for entry in entries:
                     if(report['mode']=='transfer_rate'):
@@ -110,18 +110,14 @@ class NethogsWatchdog :
                     report['timestamp']=int(round(time.time() * 1000)) #js time format
                     bridge['queue'].put(report)
 
-        p.stdout.close()
         p.terminate()
         if self.debug:
-            print 'exit'
+            print 'exited nethogs'
         else:
             report={}
             report['running']=False
             bridge['queue'].put(report)  
-        
-        #bridge['event'].wait()
-
-        
+       
 
 if __name__=='__main__':
 

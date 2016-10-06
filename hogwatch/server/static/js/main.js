@@ -85,13 +85,6 @@ function fixPrecision(num,precision){
     return parseFloat(num.toFixed(precision));
 }
 
-function getSeries(uid){
-    return {
-        download: chart().series[(uid+1)*2],
-        upload: chart().series[(uid+1)*2 +1]
-    }
-}
-
 function seriesBlueprint(mode){
     var color= mode==='download'?'#2980b9':'#e74c3c';
     return {
@@ -103,7 +96,7 @@ function seriesBlueprint(mode){
             valueSuffix: 'kBps'
         },
         data : []
-    }
+    };
 }
 
 
@@ -122,9 +115,9 @@ if ("WebSocket" in window){
     var rate= new WebSocket(getSocketURL(interfaces,'transfer_rate'));
 
     var counter=0;
-    var seen={};
-    var latestLogs=[];
     var transferHistory=[];
+    var seen = {};
+    var latestLogs = [];
     /*
             {
                 download: [[timestamp,value],...],
@@ -132,15 +125,15 @@ if ("WebSocket" in window){
             }
     */
     var transfer={
-        seen: seen,
+        seen: seen, //dict to keep track of process by name    name->uid
         latestLogs: latestLogs,
-        activeLog: -1, //-1 if total chart else uid
-        window: 0, //0 means all, else form window from minutes back to report_timestamp,
+        activeLog: -1, //-1 for overall stats. 0,1,2 .. shows stats for process with that uid
+        window: 0, //0 means entire duration of program, else specified minutes preceding last log
         total_kbps_in: 0,
         total_kbps_out: 0,
         total_kb_in: 0,
         total_kb_out:0
-    }
+    };
     
     rate.onopen=function(){
         rate.send('start');
@@ -151,7 +144,7 @@ if ("WebSocket" in window){
             color: '#2980b9',
             type: 'areaspline',
             tooltip: {
-                valueSuffix: 'kBps'
+                valueSuffix: 'KBps'
             },
             data : []
         });        
@@ -161,7 +154,7 @@ if ("WebSocket" in window){
             color: '#e74c3c',
             type: 'areaspline',
             tooltip: {
-                valueSuffix: 'kBps'
+                valueSuffix: 'KBps'
             },
             data : []
         });
@@ -172,7 +165,7 @@ if ("WebSocket" in window){
             color: '#2980b9',
             type: 'areaspline',
             tooltip: {
-                valueSuffix: 'kBps'
+                valueSuffix: 'KBps'
             },
             data : []
         });        
@@ -183,7 +176,7 @@ if ("WebSocket" in window){
             color: '#e74c3c',
             type: 'areaspline',
             tooltip: {
-                valueSuffix: 'kBps'
+                valueSuffix: 'KBps'
             },
             data : []
         });
@@ -196,22 +189,6 @@ if ("WebSocket" in window){
         report.total_in=fixPrecision(report.total_in,2);
         report.total_out=fixPrecision(report.total_out,2);
         //console.log(report);
-        
-        function addLogToSeries(entry,uid,timestamp){
-            var series= getSeries(uid);
-            series.download.addPoint([timestamp,entry['kbps_in']],false,false)
-            series.upload.addPoint([timestamp,-1*entry['kbps_out']],false,false)
-            
-            if(transfer.activeLog===uid){
-                var from=latestLogs[uid].initMoment;
-                
-                if(transfer.window!==0){
-                    from= moment().subtract(transfer.window,'minutes').toDate().valueOf();  
-                }
-                if(!transfer.paused)
-                    chart().xAxis[0].setExtremes(from,report.timestamp);                
-            }
-        }
         
         function addToHistory(entry,uid,timestamp){
             var series= transferHistory[uid]
@@ -231,9 +208,7 @@ if ("WebSocket" in window){
                 if(!transfer.paused)
                     chart().xAxis[0].setExtremes(from,report.timestamp);                
             }
-        }
-
-        
+        }    
      
           
         chart().series[0].addPoint([report.timestamp,report['total_in']],false,false);        
@@ -250,9 +225,6 @@ if ("WebSocket" in window){
                 entry.initMoment= (new Date()).valueOf();
                 latestLogs.push(entry);
                 
-                //chart().addSeries(seriesBlueprint('download'));
-                //chart().addSeries(seriesBlueprint('upload'));
-                //addLogToSeries(entry,entry.uid,report.timestamp)
                 transferHistory.push({
                     download: [],
                     upload: []
@@ -268,7 +240,6 @@ if ("WebSocket" in window){
                 var log=latestLogs[uid];
                 log['kbps_in']=entry['kbps_in'];
                 log['kbps_out']=entry['kbps_out'];
-                //addLogToSeries(log,uid,report.timestamp);
                 addToHistory(log,uid,report.timestamp);
             }
         });
@@ -285,19 +256,18 @@ if ("WebSocket" in window){
         transfer.total_kbps_in=report.total_in;
         transfer.total_kbps_out=report.total_out;
         rate.send('next');
-    }
+    };
     rate.onclose=function(){
         console.log('rate ws closed')
-    }
+    };
     
-    /*********************************/
     
     var amount= new WebSocket(getSocketURL(interfaces,'transfer_amount'));
     
     amount.onopen=function(){
         amount.send('start');
         console.log('amount ws starting')
-    }
+    };
     
     amount.onmessage=function(evt){
         var report=JSON.parse(evt.data);
@@ -316,33 +286,32 @@ if ("WebSocket" in window){
                 //console.log('transfer amount could not be matched',entry)
                 //fix this | separate the amount and rate to different views?
             }
-        })
+        });
         
         transfer.total_kb_in=report.total_in;
         transfer.total_kb_out=report.total_out;
         
         amount.send('next');
-    }
+    };
     
     amount.onclose=function(){
         console.log('amount ws was closed');
-    }
+    };
 }else{
-    // The browser doesn't support WebSocket
-    console.error("WebSocket NOT supported by your Browser!");
+    console.error("The browser doesn't support WebSocket");
 }
 
 var format= function(kbps){
     if(kbps/1000>=1.0)
-        return (kbps/1000).toFixed(2) +' mB/s';
-    else return kbps.toString() + ' kB/s'
-}
+        return (kbps/1000).toFixed(2) +' MB/s';
+    else return kbps.toString() + ' KB/s';
+};
 
 var formatAmount= function(kb){
     if(kb/1000>=1.0)
-        return (kb/1000).toFixed(2) +' mB';
-    else return kb.toString() + ' kB'
-}
+        return (kb/1000).toFixed(2) +' MB';
+    else return kb.toString() + ' KB';
+};
 
 
 transfer.paused=false;
@@ -398,7 +367,6 @@ var app= new Vue({
             
             
             if(this.activeLog===log.uid){                
-                //setVisibility(this.activeLog,false)
                 log.isActive=false;
                 
                 chart().series[2].hide();
@@ -411,17 +379,15 @@ var app= new Vue({
                 if(this.activeLog===-1){
                     chart().series[0].hide();
                     chart().series[1].hide();
+                    chart().series[2].show();
+                    chart().series[3].show();
                 }else{
-                    this.latestLogs[this.activeLog].isActive=false;
-                    //setVisibility(this.activeLog,false)                    
+                    this.latestLogs[this.activeLog].isActive=false;                   
                 }               
-                //setVisibility(log.uid,true);
                 log.isActive=true;
+                this.activeLog=log.uid;
                 chart().series[2].setData(transferHistory[log.uid].download);
                 chart().series[3].setData(transferHistory[log.uid].upload);
-                chart().series[2].show();
-                chart().series[3].show();
-                this.activeLog=log.uid;
             }
         },
         toggleWindowState: function(){

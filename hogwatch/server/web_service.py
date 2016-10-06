@@ -1,6 +1,6 @@
 import json, gevent
 from Queue import Queue
-from threading import Thread, Event
+from threading import Thread
 from pprint import pprint
 import netifaces
 import os
@@ -56,12 +56,10 @@ def app_server(
             if debugMode:
                 pprint(device_list)
                 pprint(mode)
-                print '******************************************'
 
             watchdog=NethogsWatchdog(devices=device_list)
             bridge={
-                'queue': Queue(),
-                'event': Event()
+                'queue': Queue()
             }
 
             t=Thread(
@@ -74,7 +72,7 @@ def app_server(
                 abort(400, 'Expected WebSocket request.')
 
 
-            t.setDaemon(True)
+            #t.setDaemon(True)
             t.start()               
         
             while True:
@@ -120,4 +118,3 @@ def app_server(
 
 if __name__ == '__main__':
     app_server(ws=True)
-    #todo kill threads on kill signal
