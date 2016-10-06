@@ -4,7 +4,8 @@
   "description": "hogwatch menubar app",
   "dependencies": {
     "electron-prebuilt": "^0.36.0",
-    "exec": "0.2.1"
+    "exec": "0.2.1",
+    "menubar": "^5.1.0"
   },
   "bin": {
     "hogwatch-menubar": "./script"

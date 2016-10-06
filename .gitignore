@@ -6,3 +6,5 @@ dist
 build
 hogwatch.egg-info
 MANIFEST
+npm-debug.log
+menubar/npm-debug.log
