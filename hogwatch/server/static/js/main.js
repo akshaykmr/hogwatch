@@ -104,9 +104,12 @@ function seriesBlueprint(mode){
 var defaultInterfaces=['all'];
 
 function getSocketURL(interface_list,mode){
-    var host=location.host;    
-    var socketURL='ws://'+host+'/websocket/'+interface_list.join('_')+'/'+mode;
-    return socketURL;    
+    var host=location.host;
+    if (location.protocol === 'https:') {
+        return socketURL='wss://'+host+'/websocket/'+interface_list.join('_')+'/'+mode;
+    } else {
+        return socketURL='ws://'+host+'/websocket/'+interface_list.join('_')+'/'+mode;
+    }
 }
 
 if ("WebSocket" in window){
