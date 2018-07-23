@@ -103,10 +103,9 @@ function seriesBlueprint(mode){
 //to get all devices GET /interfaces  :for now I am just using all available interfaces
 var defaultInterfaces=['all'];
 
-function getSocketURL(interface_list,mode){
-    var host=location.host;    
-    var socketURL='ws://'+host+'/websocket/'+interface_list.join('_')+'/'+mode;
-    return socketURL;    
+function getSocketURL(interface_list, mode) {
+    var socketProtocol = location.protocol === 'https:' ? 'wss://' : 'ws://';
+    return socketProtocol + location.host + '/websocket/' + interface_list.join('_') + '/' + mode;
 }
 
 if ("WebSocket" in window){
