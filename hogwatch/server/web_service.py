@@ -1,40 +1,36 @@
-import json, gevent
+import json
+import gevent
 from Queue import Queue
 from threading import Thread
 from pprint import pprint
 import netifaces
 import os
 
+from watchdogs.nethogs import NethogsWatchdog
+
 from bottle import (
     Bottle,
-    route,
-    run,
-    template,
     static_file,
     redirect,
-    debug,
     request,
     abort
 )
-local_path=os.path.abspath(os.path.dirname(__file__))
-path_for_static_assets= os.path.join(local_path,'static')
+
+local_path = os.path.abspath(os.path.dirname(__file__))
+path_for_static_assets = os.path.join(local_path, 'frontend')
 
 path_for_static_assets += '/'
-#print path_for_static_assets 
 
-from watchdogs.nethogs import NethogsWatchdog
 
 def app_server(
         host='0.0.0.0',
         port=6432,
         debugMode=False,
         reloader=True,
-        ws=True
-    ):
+        ws=True):
 
     print 'starting web server at: localhost:' + str(port)
-    app=Bottle()
-
+    app = Bottle()
 
     @app.route('/')
     def home():
@@ -43,42 +39,40 @@ def app_server(
     @app.route('/interfaces')
     def interfaces():
         return {'interfaces': netifaces.interfaces()}
-    
-    if ws:
 
+    if ws:
         @app.route('/websocket/<device>/<mode>')
         def handle_websocket(device='all',mode='transfer_rate'):
-            if(device=='all'):
-                device_list=[]
+            if(device == 'all'):
+                device_list = []
             else:
-                device_list= device.split('_')
+                device_list = device.split('_')
 
             if debugMode:
                 pprint(device_list)
                 pprint(mode)
 
-            watchdog=NethogsWatchdog(devices=device_list)
-            bridge={
+            watchdog = NethogsWatchdog(devices=device_list)
+            bridge = {
                 'queue': Queue()
             }
 
-            t=Thread(
+            t = Thread(
                 target=watchdog.watch_transfer,
-                args=(mode,bridge)
+                args=(mode, bridge)
             )
 
             wsock = request.environ.get('wsgi.websocket')
             if not wsock:
                 abort(400, 'Expected WebSocket request.')
 
+            # t.setDaemon(True)
+            t.start()
 
-            #t.setDaemon(True)
-            t.start()               
-        
             while True:
                 try:
-                    message = wsock.receive()
-                    report=bridge['queue'].get()
+                    wsock.receive()
+                    report = bridge['queue'].get()
 
                     if not report['running']:
                         break
@@ -88,32 +82,33 @@ def app_server(
                     gevent.sleep(0.1)
 
                 except WebSocketError:
-                    watchdog.terminate()                       
+                    watchdog.terminate()
                     break
-
 
     @app.route('/<filename:path>')
     def send_static(filename):
-        
         return static_file(
             filename,
             root=path_for_static_assets
         )
 
-    try:        
+    try:
         if ws:
             from gevent.pywsgi import WSGIServer
             from geventwebsocket import WebSocketError
             from geventwebsocket.handler import WebSocketHandler
-            server = WSGIServer((host, port), app, handler_class=WebSocketHandler)
+            server = WSGIServer(
+                (host, port),
+                app,
+                handler_class=WebSocketHandler)
+
             server.serve_forever()
         else:
-            port=str(port)
+            port = str(port)
             app.run(host=host, port=port, debug=debugMode, reloader=reloader)
 
     except (KeyboardInterrupt, SystemExit):
         print "exit"
-
 
 
 if __name__ == '__main__':
