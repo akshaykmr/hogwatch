@@ -3,8 +3,10 @@ from setuptools import find_packages
 
 import os
 
+
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 
 setup(
     # Application name:
@@ -26,20 +28,19 @@ setup(
 
     # Details
     url="https://github.com/akshayKMR/hogwatch",
-    #setup_requires=['setuptools-markdown'],
-    #long_description_markdown_filename='README.md',
 
     #
-    license="MIT" ,
+    license="MIT",
     description="find out whats hogging your internet",
 
-    long_description="A bandwidth monitor that shows per process network transfer",
+    long_description="""A bandwidth monitor that shows
+    per process network transfer""",
 
     # Dependent packages (distributions)
     install_requires=[
         "bottle",
         'pywebview',
         'gevent-websocket',
-	    'netifaces'
+        'netifaces'
     ],
 )
