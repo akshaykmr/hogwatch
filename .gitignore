@@ -9,3 +9,4 @@ MANIFEST
 npm-debug.log
 menubar/npm-debug.log
 bin/*
+**/node_modules/*

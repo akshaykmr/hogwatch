@@ -9,6 +9,7 @@ gevent = "*"
 gevent-websocket = "*"
 netifaces = "*"
 pywebview = "*"
+pyobjc = "*"
 
 [dev-packages]
 

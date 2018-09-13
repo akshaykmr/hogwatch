@@ -17,7 +17,7 @@ from bottle import (
 )
 
 local_path = os.path.abspath(os.path.dirname(__file__))
-path_for_static_assets = os.path.join(local_path, 'frontend')
+path_for_static_assets = os.path.join(local_path, 'frontend', 'vendor')
 
 path_for_static_assets += '/'
 
@@ -29,7 +29,7 @@ def app_server(
         reloader=True,
         ws=True):
 
-    print 'starting web server at: localhost:' + str(port)
+    print 'starting web server at: http://localhost:' + str(port)
     app = Bottle()
 
     @app.route('/')
