@@ -18,13 +18,11 @@ Here are some things that need to be fixed/added for eg.
 
 > this project was made quickly; and had to workaround certain limitations using ineffecient techniques.
 
-> for eg. nethogs does not show transfer speed and amount in the same trace output. for this I had to spawn 2 nethogs process with different cli args and match the the output logs using a dict later, using pid as key.
+- for eg. nethogs does not show transfer speed and amount in the same trace output. for this I had to spawn 2 nethogs process with different cli args and match the the output logs using a dict later, using pid as key.
 
-> I also spawn a new nethogs process for each new websocket connection, and therefore logs will start afresh for a new session.
-> Instead I should have spawned one and collected the logs somewhere. [Netdata](https://my-netdata.io) is an awesome software I found that solves logs and realtime charts very gracefully, its architecture is something I wish to study later.
+- I also spawn a new nethogs process for each new websocket connection, and therefore logs will start afresh for a new session. Instead I should have spawned one and collected the logs somewhere. [Netdata](https://my-netdata.io) is an awesome software I found that solves logs and realtime charts very gracefully, its architecture is something I wish to study later.
 
-> This program is not suitable for long use, As the process list will grow very large and slow down the UI.
-> personally I run it only to view quick graphs when I want.
+- This program is not suitable for long use, As the process list will grow very large and slow down the UI. personally I run it only to view quick graphs when I want.
 
 ###### *Screenshots*
 <img src="http://i.imgur.com/LGQagKL.png" height="600px">
